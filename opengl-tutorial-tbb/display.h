@@ -26,7 +26,7 @@ private:
     
     SDL_Window* m_window;
     SDL_GLContext m_glContext;
-    bool isClosed;
+    bool m_isClosed;
 };
 
 #endif
