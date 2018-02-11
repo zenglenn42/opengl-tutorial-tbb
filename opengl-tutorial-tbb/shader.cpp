@@ -33,6 +33,11 @@ Shader::~Shader()
     glDeleteProgram(m_program);
 }
 
+void Shader::Bind()
+{
+    glUseProgram(m_program);
+}
+
 GLuint Shader::CreateShader(const std::string& text, unsigned int type)
 {
     GLuint shader = glCreateShader(type);

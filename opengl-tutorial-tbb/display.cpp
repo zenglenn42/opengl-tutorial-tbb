@@ -22,6 +22,7 @@ Display::Display(int width, int height, const std::string& title)
     m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
     m_glContext = SDL_GL_CreateContext(m_window);
     
+    glewExperimental = GL_TRUE; // https://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call
     GLenum res = glewInit();
     if(res != GLEW_OK)
     {
