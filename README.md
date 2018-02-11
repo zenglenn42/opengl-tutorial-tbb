@@ -2,11 +2,12 @@
 
 Following along in this opengl tutorial: https://www.youtube.com/playlist?list=PLEETnX-uPtBXT9T-hD0Bj31DSnwio-ywh
 
-I like this series because it addresses:
+I like this series because it:
 
-	* basic opengl concepts
-	* how to abstract opengl programming with c++ classes
-	* use of SDL2 for portable windowing and user-interfaces that wrapper our opengl renderings
+	* addresses basic opengl concepts
+	* shows how to abstract opengl programming with c++ classes
+	* employs a portable and modern windowing sdk (SDL2) to wrapper our opengl renderings
+	* discusses the programmable GPU pipeline
 
 # Build dependencies from source
 
