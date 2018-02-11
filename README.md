@@ -30,4 +30,4 @@ then built and installed them to ../dependencies with:
 	make
 	make install
 
-At that point, I can now build from within Xcode.  There's probably a more unified way to do all this, but I'm trying not too snarled up in build generality.
+With that out of the way, I can now build from within Xcode IDE for a better dev workflow.  There's probably a more unified way to do all this, but I'm trying not to get too snarled up in build generality.
