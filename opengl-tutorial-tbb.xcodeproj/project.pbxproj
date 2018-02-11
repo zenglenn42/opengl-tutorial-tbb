@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C40A8C72030B3CA00314A71 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C40A8C62030B3CA00314A71 /* shader.cpp */; };
 		0C93A7D0203018CE00FCCDDD /* display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C93A7CF203018CE00FCCDDD /* display.cpp */; };
 		0C93A7D320301AC000FCCDDD /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7D220301AC000FCCDDD /* OpenGL.framework */; };
 		0C93A7D520301C3D00FCCDDD /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7D420301C3D00FCCDDD /* libGLEW.a */; };
@@ -20,21 +21,27 @@
 		0C93A7E52030222700FCCDDD /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7E42030222700FCCDDD /* libiconv.tbd */; };
 		0C93A7E72030227F00FCCDDD /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7E62030227F00FCCDDD /* Carbon.framework */; };
 		0CA5477B203088790065F0BE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA5477A203088790065F0BE /* main.cpp */; };
+		0CAFDBC82030C36A0074AB4E /* basicShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC62030C17A0074AB4E /* basicShader.vs */; };
+		0CAFDBC92030C3700074AB4E /* basicShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC72030C1AB0074AB4E /* basicShader.fs */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		0C781B4D20300BB90000131F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = Resources;
+			dstSubfolderSpec = 16;
 			files = (
+				0CAFDBC92030C3700074AB4E /* basicShader.fs in CopyFiles */,
+				0CAFDBC82030C36A0074AB4E /* basicShader.vs in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C40A8C62030B3CA00314A71 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
+		0C40A8C82030B4F000314A71 /* shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
 		0C781B4F20300BB90000131F /* opengl-tutorial-tbb */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "opengl-tutorial-tbb"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C93A7CE203018CE00FCCDDD /* display.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = display.h; sourceTree = "<group>"; };
 		0C93A7CF203018CE00FCCDDD /* display.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = display.cpp; sourceTree = "<group>"; };
@@ -50,6 +57,8 @@
 		0C93A7E42030222700FCCDDD /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		0C93A7E62030227F00FCCDDD /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		0CA5477A203088790065F0BE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		0CAFDBC62030C17A0074AB4E /* basicShader.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = basicShader.vs; sourceTree = "<group>"; };
+		0CAFDBC72030C1AB0074AB4E /* basicShader.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = basicShader.fs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +86,7 @@
 		0C781B4620300BB90000131F = {
 			isa = PBXGroup;
 			children = (
+				0CAFDBC52030C0DE0074AB4E /* Resources */,
 				0C781B5120300BB90000131F /* opengl-tutorial-tbb */,
 				0C781B5020300BB90000131F /* Products */,
 				0C93A7D120301ABF00FCCDDD /* Frameworks */,
@@ -97,6 +107,8 @@
 				0CA5477A203088790065F0BE /* main.cpp */,
 				0C93A7CE203018CE00FCCDDD /* display.h */,
 				0C93A7CF203018CE00FCCDDD /* display.cpp */,
+				0C40A8C62030B3CA00314A71 /* shader.cpp */,
+				0C40A8C82030B4F000314A71 /* shader.h */,
 			);
 			path = "opengl-tutorial-tbb";
 			sourceTree = "<group>";
@@ -117,6 +129,15 @@
 				0C93A7D220301AC000FCCDDD /* OpenGL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0CAFDBC52030C0DE0074AB4E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0CAFDBC62030C17A0074AB4E /* basicShader.vs */,
+				0CAFDBC72030C1AB0074AB4E /* basicShader.fs */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C40A8C72030B3CA00314A71 /* shader.cpp in Sources */,
 				0C93A7D0203018CE00FCCDDD /* display.cpp in Sources */,
 				0CA5477B203088790065F0BE /* main.cpp in Sources */,
 			);
