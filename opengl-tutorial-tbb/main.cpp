@@ -2,8 +2,6 @@
 //  main.cpp
 //  opengl-tutorial-tbb
 //
-//  Copyright © 2018 zenglenn42. All rights reserved.
-//
 
 #include <iostream>
 #include "display.h"

@@ -2,9 +2,6 @@
 //  display.cpp
 //  opengl-tutorial-tbb
 //
-//  Created by m on 2/11/18.
-//  Copyright © 2018 zenglenn42. All rights reserved.
-//
 
 #include "display.h"
 #include <GL/glew.h>

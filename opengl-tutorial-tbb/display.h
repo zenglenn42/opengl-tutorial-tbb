@@ -2,9 +2,6 @@
 //  display.h
 //  opengl-tutorial-tbb
 //
-//  Created by m on 2/11/18.
-//  Copyright © 2018 zenglenn42. All rights reserved.
-//
 
 #ifndef DISPLAY_INCLUDED_H
 #define DISPLAY_INCLUDED_H
