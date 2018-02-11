@@ -8,7 +8,7 @@ I like this series because it addresses:
 	* how to abstract opengl programming with c++ classes
 	* use of SDL2 for portable windowing and user-interfaces that wrapper our opengl renderings
 
-# Build dependencies from sourc
+# Build dependencies from source
 
 I've included some Xcode project files in my repo, but they assume the following dependencies have been installed under
 
