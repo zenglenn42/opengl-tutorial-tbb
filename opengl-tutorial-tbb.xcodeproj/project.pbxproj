@@ -58,16 +58,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C93A7E72030227F00FCCDDD /* Carbon.framework in Frameworks */,
-				0C93A7E52030222700FCCDDD /* libiconv.tbd in Frameworks */,
 				0C93A7E32030200300FCCDDD /* IOKit.framework in Frameworks */,
 				0C93A7E120301FB500FCCDDD /* ForceFeedback.framework in Frameworks */,
 				0C93A7DF20301F8D00FCCDDD /* CoreVideo.framework in Frameworks */,
 				0C93A7DD20301F5300FCCDDD /* Cocoa.framework in Frameworks */,
 				0C93A7DB20301EED00FCCDDD /* AudioToolbox.framework in Frameworks */,
 				0C93A7D920301CE500FCCDDD /* CoreAudio.framework in Frameworks */,
+				0C93A7E52030222700FCCDDD /* libiconv.tbd in Frameworks */,
+				0C93A7D320301AC000FCCDDD /* OpenGL.framework in Frameworks */,
 				0C93A7D720301C5200FCCDDD /* libSDL2.a in Frameworks */,
 				0C93A7D520301C3D00FCCDDD /* libGLEW.a in Frameworks */,
-				0C93A7D320301AC000FCCDDD /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
