@@ -8,20 +8,9 @@
 
 int main(int argc, const char * argv[]) {
     Display display(800, 600, "Hello World");
-
-    bool quit = false;
-    SDL_Event event;
-    
-    while (!quit)
-    {
-        SDL_WaitEvent(&event);
-        
-        switch (event.type)
-        {
-            case SDL_QUIT:
-                quit = true;
-                break;
-        }
+    while (!display.IsClosed()) {
+        display.Clear(0.2f, 0.3f, 0.8f, 1.0f);
+        display.Update();
     }
     return 0;
 }
