@@ -19,16 +19,21 @@
 #-----------------------------------------------------------------
 .SUFFIXES:
 
+PROJECT = opengl-tutorial-tbb
 top_DIR = $(PWD)
 
 # Tools isolation
 
 CMAKE = cmake
 
+# Build and install dependencies out of tree.
+
 # Directory where src zips reside.
 dep_ZIP_DIR = $(top_DIR)/../dependencies-srczip
-dep_INSTALL_DIR = $(top_DIR)/dependencies
-dep_BUILD_DIR   = $(top_DIR)/build-dependencies
+# Install directory for built deps.
+dep_INSTALL_DIR = $(top_DIR)/../$(PROJECT)-dependencies
+# Build area for deps.
+dep_BUILD_DIR   = $(top_DIR)/../$(PROJECT)-build-dependencies
 
 #---------------
 # glew-2.1.0.zip

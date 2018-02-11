@@ -7,9 +7,9 @@
 //
 
 #include <iostream>
+#include "display.h"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!" << std::endl;
+    Display display(800, 600, "Hello World");
     return 0;
 }
