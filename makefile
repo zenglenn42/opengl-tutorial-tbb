@@ -11,8 +11,7 @@
 #    make            # builds src zips into build-dependencies
 #    make install    # install deps to dependencies/{include, lib}
 #
-# The only requirement is that the zip files be in the same directory
-# as this makefile.
+# update dep_ZIP_DIR = path/to/src_zips as needed
 #
 # Tested on OSX 10.13
 #
