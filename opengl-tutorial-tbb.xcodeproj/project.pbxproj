@@ -19,7 +19,7 @@
 		0C93A7E32030200300FCCDDD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7E22030200300FCCDDD /* IOKit.framework */; };
 		0C93A7E52030222700FCCDDD /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7E42030222700FCCDDD /* libiconv.tbd */; };
 		0C93A7E72030227F00FCCDDD /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7E62030227F00FCCDDD /* Carbon.framework */; };
-		0CAF4AE12030181000D182FE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CAF4AE02030181000D182FE /* main.cpp */; };
+		0CA5477B203088790065F0BE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA5477A203088790065F0BE /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,7 +49,7 @@
 		0C93A7E22030200300FCCDDD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		0C93A7E42030222700FCCDDD /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		0C93A7E62030227F00FCCDDD /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
-		0CAF4AE02030181000D182FE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../Documents/main.cpp; sourceTree = "<group>"; };
+		0CA5477A203088790065F0BE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +94,7 @@
 		0C781B5120300BB90000131F /* opengl-tutorial-tbb */ = {
 			isa = PBXGroup;
 			children = (
-				0CAF4AE02030181000D182FE /* main.cpp */,
+				0CA5477A203088790065F0BE /* main.cpp */,
 				0C93A7CE203018CE00FCCDDD /* display.h */,
 				0C93A7CF203018CE00FCCDDD /* display.cpp */,
 			);
@@ -177,7 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C93A7D0203018CE00FCCDDD /* display.cpp in Sources */,
-				0CAF4AE12030181000D182FE /* main.cpp in Sources */,
+				0CA5477B203088790065F0BE /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
