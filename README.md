@@ -21,7 +21,7 @@ To accomplish this, I downloaded the following src zip files:
 	* SDL2-2.0.7.zip
 	* glew-2.1.0.zip
 	* glm-0.9.8.5.zip
-	* [debugbreak-7ee9b29.zip](https://github.com/scottt/debugbreak/archive/master.zip)
+	* [debugbreak-7ee9b29.zip](https://github.com/scottt/debugbreak)
 
 and staged them under:
 
