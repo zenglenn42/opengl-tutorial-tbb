@@ -96,7 +96,7 @@ In the process, I picked up some debug strategies that should serve me nicely go
 
 * Crafted debug [vertex](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.vs) and [fragment](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.fs) shaders that allow easy overrides for incoming and outgoing variables.
 
-Even after deploying theCherno's debug fu and wrangling community suggestions, I still had a blank window after a full day of effort.  In the morning, I realized I didn't know if the issue was on the CPU or GPU side.  Was there are problem with the mesh vertices getting sent down?  Was it some backlevel driver weirdness on macOS?
+Even after deploying theCherno's debug fu and wrangling community suggestions, I still had a blank window after a full day of effort.  In the morning, I realized I didn't know if the issue was on the CPU or GPU side.  Was there a problem with the mesh vertices getting sent down?  Was it some backlevel driver weirdness on macOS?
 
 Even with the skeleton shaders, my render window was blank, so I shifted my focus upstream to the CPU side.  I dropped the mesh vertices array from the tutorial and just made my own legacy mesh using the fixed pipeline idiom:
 
