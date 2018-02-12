@@ -35,3 +35,55 @@ then built and installed them to ../dependencies with:
 With that out of the way, I can now build from within the Xcode IDE for a better dev workflow.  There's probably a more unified way to do all this, but I'm trying not to get too snarled up in build generality.
 
 Strangely, my first attempt at running the wafer-thin example code that just brings up an empty SDL window failed with a borderless window (with no title or sizing decorations).  I speculate this was a dynamic link library search path issue which probably could be resolved by tweaking the embedded rpath of the executable through Xcode's Build Settings: Linking/Runpath Search Paths or tweaking with the dynamic library search path at the shell level.  I opted for just going with static linking by removing the dynamically linked libraries out of the dependencies directory and rebuilding from within Xcode.
+
+# Getting Tutorial 3.5 to build and render is a Thing
+
+Lightness and dark, a metaphor for life and opengl programming.  You type the code in perfectly and are rewarded with an empty rendering window.  It's a dark alley and you're not sure how to proceed.
+
+I double checked the code, started reading the comment section of the youtube video, and looked for general strategies for OpenGL debugging, then slept on it so my subconcious could churn away on the mystery.
+
+To cut two the chase, I hit two issues:
+
+	* mesh.cpp Mesh::Mesh constructor fails in glGenVertexArrays() with EXC_BAD_ACCESS
+	* main.cpp main() vertices specified in clockwise order were getting culled by uplevel display.cpp from github.
+
+I fixed the first issue in display.cpp by enabling glewExperimental:
+
+```
+display.cpp
+    ...
+    Display::Display(...)
+
+    //
+    // NB: Avoid "Thread 1: EXC_BAD_ACCESS (code=1, address=0x0)"
+    // https://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call
+    //
+>>> glewExperimental = GL_TRUE;
+    
+    GLenum res = glewInit();
+    ...
+```
+
+I fixed the second issue by reording the verties in counter-clockwise order:
+
+```
+main.cpp
+
+    int main(...)
+    ...
+    Vertex vertices[] =
+    {
+        // NB: Vertices specified in counter-clockwise order are
+        //     interpreted as front-facing by convention.
+        //
+        // This is important to know if your code culls back-facing vertices
+        // and you mistakenly specify them in clockwise order ...
+        // and now are wondering why your rendering window is blank. :-/
+
+        Vertex(glm::vec3(-0.5, -0.5, 0.0)),
+>>>     Vertex(glm::vec3( 0.5, -0.5, 0.0)),
+>>>     Vertex(glm::vec3( 0.0,  0.5, 0.0))
+    };
+```
+
+![alt tag](img/tutorial-3.5.png)
