@@ -68,14 +68,27 @@ sdl2_BLD_DIR = $(sdl2_SRC_DIR)/build
 sdl2_Build   = $(sdl2_BLD_DIR)/cmake_install.cmake
 sdl2_Install = $(sdl2_PREFIX)/include/SDL2/SDL.h
 
-default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build)
+#-----------------------
+# debugbreak-7ee9b29.zip
+#-----------------------
+debugbreak_VERSION = 7ee9b29
+debugbreak_SRC_ZIP = $(dep_ZIP_DIR)/debugbreak-$(debugbreak_VERSION).zip
+debugbreak_SRC_DIR = $(dep_BUILD_DIR)/debugbreak-master
+debugbreak_PREFIX  = $(dep_INSTALL_DIR)
+debugbreak_BLD_DIR = $(debugbreak_SRC_DIR)
+debugbreak_Build   = $(debugbreak_BLD_DIR)/debugbreak.h
+debugbreak_IDIR    = $(debugbreak_PREFIX)/include/debugbreak
+debugbreak_Install = $(debugbreak_IDIR)/debugbreak.h
+
+default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build) $(debugbreak_Build)
 
 .PHONY: glew glm sdl2
 glew: $(dep_BUILD_DIR) $(glew_Build) $(dep_INSTALL_DIR) $(glew_Install)
 glm: $(dep_BUILD_DIR) $(glm_Build) $(dep_INSTALL_DIR) $(glm_Install)
 sdl2: $(dep_BUILD_DIR) $(sdl2_Build) $(dep_INSTALL_DIR) $(sdl2_Install)
+debugbreak: $(dep_BUILD_DIR) $(debugbreak_Build) $(dep_INSTALL_DIR) $(debugbreak_Install)
 
-$(dep_BUILD_DIR) $(dep_INSTALL_DIR):
+$(dep_BUILD_DIR) $(dep_INSTALL_DIR) $(debugbreak_IDIR):
 	mkdir -p $@
 
 unzip_CURRENT_TIME = -DD
@@ -93,6 +106,10 @@ sdl2_Unpack = $(sdl2_SRC_DIR)/CMakeLists.txt
 $(sdl2_Unpack): $(sdl2_SRC_ZIP)
 	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(sdl2_SRC_ZIP)
 
+debugbreak_Unpack = $(debugbreak_SRC_DIR)/GNUmakefile
+$(debugbreak_Unpack): $(debugbreak_SRC_ZIP)
+	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(debugbreak_SRC_ZIP)
+
 $(glew_Build): $(glew_Unpack)
 	cd $(glew_SRC_DIR) && $(MAKE) GLEW_PREFIX=$(glew_PREFIX) GLEW_DEST=$(glew_DEST)
 
@@ -103,7 +120,10 @@ $(sdl2_Build): $(sdl2_Unpack)
 	mkdir -p $(sdl2_BLD_DIR) && cd $(sdl2_BLD_DIR) && $(CMAKE) -DCMAKE_INSTALL_PREFIX=$(sdl2_PREFIX) ..
 	cd $(sdl2_BLD_DIR) && $(MAKE)
 
-install: $(dep_INSTALL_DIR) $(glew_Install) $(glm_Install) $(sdl2_Install)
+$(debugbreak_Build): $(debugbreak_Unpack)
+	cd $(debugbreak_SRC_DIR) && $(MAKE)
+
+install: $(dep_INSTALL_DIR) $(glew_Install) $(glm_Install) $(sdl2_Install) $(debugbreak_Install)
 
 $(glew_Install):
 	cd $(glew_SRC_DIR) && $(MAKE) install GLEW_PREFIX=$(glew_PREFIX) GLEW_DEST=$(glew_DEST)
@@ -113,6 +133,9 @@ $(glm_Install):
 
 $(sdl2_Install):
 	cd $(sdl2_SRC_DIR)/build && $(MAKE) install
+
+$(debugbreak_Install): | $(debugbreak_IDIR)
+	cp $(debugbreak_Build) $(debugbreak_IDIR)
 
 .PHONY: clean
 clean:

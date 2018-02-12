@@ -24,6 +24,7 @@
 		0CAFDBC82030C36A0074AB4E /* basicShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC62030C17A0074AB4E /* basicShader.vs */; };
 		0CAFDBC92030C3700074AB4E /* basicShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC72030C1AB0074AB4E /* basicShader.fs */; };
 		0CAFDBCB2030C9EC0074AB4E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */; };
+		0CF6FBD7203121FB00CC0E13 /* glerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF6FBD6203121FB00CC0E13 /* glerror.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +63,8 @@
 		0CAFDBC72030C1AB0074AB4E /* basicShader.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = basicShader.fs; sourceTree = "<group>"; };
 		0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
 		0CAFDBCC2030CA1E0074AB4E /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
+		0CF6FBD6203121FB00CC0E13 /* glerror.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = glerror.cpp; sourceTree = "<group>"; };
+		0CF6FBD8203122EF00CC0E13 /* glerror.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glerror.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 				0C40A8C82030B4F000314A71 /* shader.h */,
 				0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */,
 				0CAFDBCC2030CA1E0074AB4E /* mesh.h */,
+				0CF6FBD6203121FB00CC0E13 /* glerror.cpp */,
+				0CF6FBD8203122EF00CC0E13 /* glerror.h */,
 			);
 			path = "opengl-tutorial-tbb";
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 				0C93A7D0203018CE00FCCDDD /* display.cpp in Sources */,
 				0CAFDBCB2030C9EC0074AB4E /* mesh.cpp in Sources */,
 				0CA5477B203088790065F0BE /* main.cpp in Sources */,
+				0CF6FBD7203121FB00CC0E13 /* glerror.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

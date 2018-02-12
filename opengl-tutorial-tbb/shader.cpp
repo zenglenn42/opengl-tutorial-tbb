@@ -4,6 +4,7 @@
 //
 
 #include "shader.h"
+#include "glerror.h"
 #include <iostream>
 #include <fstream>
 
@@ -50,7 +51,7 @@ GLuint Shader::CreateShader(const std::string& text, unsigned int type)
     GLint lengths[1];
     lengths[0] = text.length();
     
-    glShaderSource(shader, 1, p, lengths);
+    GLCall(glShaderSource(shader, 1, p, lengths));
     glCompileShader(shader);
     
     CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error compiling shader!");
