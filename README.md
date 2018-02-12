@@ -42,7 +42,7 @@ Lightness and dark, a metaphor for life and opengl programming.  You type the co
 
 I double checked the code, started reading the comment section of the youtube video, and looked for general strategies for OpenGL debugging, then slept on it so my subconcious could churn away on the mystery.
 
-To cut two the chase, I hit two issues:
+To cut to the chase, I hit two issues:
 
 	* mesh.cpp Mesh::Mesh constructor fails in glGenVertexArrays() with EXC_BAD_ACCESS
 	* main.cpp main() vertices specified in clockwise order were getting culled by uplevel display.cpp from github.
