@@ -42,7 +42,7 @@ Lightness and dark, a metaphor for life and opengl programming.  You type the co
 
 I double checked the code, started reading the comment section of the youtube video, and looked for general strategies for OpenGL debugging, then slept on it so my subconcious could churn away on the mystery.
 
-To cut to the chase, I hit two issues:
+Cutting to the chase, I hit two issues:
 
 	* mesh.cpp Mesh::Mesh constructor fails in glGenVertexArrays() with EXC_BAD_ACCESS
 	* main.cpp main() vertices specified in clockwise order were getting culled by uplevel display.cpp from github.
@@ -87,3 +87,10 @@ main.cpp
 ```
 
 ![alt tag](img/tutorial-3.5.png)
+
+In the process, I picked up some debug strategies that should serve me nicely going forward:
+
+* Leveraged Yan Cherno's [GLCall() wrapper](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/opengl-tutorial-tbb/gldebug.h) that breaks to the debugger when glError complains.
+
+* Crafted a debug [vertex](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.vs) and [fragment](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.fs) shaders that allow easy overrides for incoming and outgoing variables.
+
