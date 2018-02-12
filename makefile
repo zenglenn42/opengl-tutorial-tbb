@@ -13,6 +13,19 @@
 #
 # update dep_ZIP_DIR = path/to/src_zips as needed
 #
+# Once the dependencies are built, you should be able to switch
+# to building from within Xcode.
+#
+# TODO: A cmake front-end to this would be more portable than 
+#       this custom makefile and hard-coded Xcode project file.
+#
+# Also, for my own amazement, I'm documenting where stuff lands
+# when building within Xcode in a dev work-flow:
+#
+# /Users/<user>/Library/Developer/Xcode/DerivedData/opengl-tutorial-tbb-<mangled-name>/Build/Products/Debug
+#
+# which feels like a distant and exotic land.
+#
 # Tested on OSX 10.13
 #
 # Copyright (☯) 2018 Glenn Streiff

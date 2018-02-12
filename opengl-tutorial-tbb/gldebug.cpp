@@ -1,14 +1,17 @@
 //
 //  glerror.cpp
-//  opengl-tutorial-tbb
 //
-//  Courtesy: https://www.youtube.com/watch?v=FBbPWSOQ0-w&index=10&list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2
+//  See gldebug.h for usage and attribution credits.
 //
 
 #include <GL/glew.h>
 #include <iostream>
 
 void GLClearError() {
+    
+    // Get to an empty error state, typically before a call to
+    // an OpenGL primitive.
+    
     while (glGetError() != GL_NO_ERROR);
 }
 

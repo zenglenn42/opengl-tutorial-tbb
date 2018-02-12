@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C2961602031E383009A1145 /* debugShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C29615E2031DDF6009A1145 /* debugShader.fs */; };
+		0C2961612031E383009A1145 /* debugShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C29615F2031DDF6009A1145 /* debugShader.vs */; };
 		0C40A8C72030B3CA00314A71 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C40A8C62030B3CA00314A71 /* shader.cpp */; };
 		0C93A7D0203018CE00FCCDDD /* display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C93A7CF203018CE00FCCDDD /* display.cpp */; };
 		0C93A7D320301AC000FCCDDD /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7D220301AC000FCCDDD /* OpenGL.framework */; };
@@ -24,7 +26,7 @@
 		0CAFDBC82030C36A0074AB4E /* basicShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC62030C17A0074AB4E /* basicShader.vs */; };
 		0CAFDBC92030C3700074AB4E /* basicShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC72030C1AB0074AB4E /* basicShader.fs */; };
 		0CAFDBCB2030C9EC0074AB4E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */; };
-		0CF6FBD7203121FB00CC0E13 /* glerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF6FBD6203121FB00CC0E13 /* glerror.cpp */; };
+		0CF6FBD7203121FB00CC0E13 /* gldebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +36,8 @@
 			dstPath = Resources;
 			dstSubfolderSpec = 6;
 			files = (
+				0C2961602031E383009A1145 /* debugShader.fs in CopyFiles */,
+				0C2961612031E383009A1145 /* debugShader.vs in CopyFiles */,
 				0CAFDBC92030C3700074AB4E /* basicShader.fs in CopyFiles */,
 				0CAFDBC82030C36A0074AB4E /* basicShader.vs in CopyFiles */,
 			);
@@ -42,6 +46,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C29615E2031DDF6009A1145 /* debugShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = debugShader.fs; sourceTree = "<group>"; };
+		0C29615F2031DDF6009A1145 /* debugShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = debugShader.vs; sourceTree = "<group>"; };
 		0C40A8C62030B3CA00314A71 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
 		0C40A8C82030B4F000314A71 /* shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
 		0C781B4F20300BB90000131F /* opengl-tutorial-tbb */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "opengl-tutorial-tbb"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,8 +69,8 @@
 		0CAFDBC72030C1AB0074AB4E /* basicShader.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = basicShader.fs; sourceTree = "<group>"; };
 		0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
 		0CAFDBCC2030CA1E0074AB4E /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
-		0CF6FBD6203121FB00CC0E13 /* glerror.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = glerror.cpp; sourceTree = "<group>"; };
-		0CF6FBD8203122EF00CC0E13 /* glerror.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glerror.h; sourceTree = "<group>"; };
+		0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gldebug.cpp; sourceTree = "<group>"; };
+		0CF6FBD8203122EF00CC0E13 /* gldebug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gldebug.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,8 +123,8 @@
 				0C40A8C82030B4F000314A71 /* shader.h */,
 				0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */,
 				0CAFDBCC2030CA1E0074AB4E /* mesh.h */,
-				0CF6FBD6203121FB00CC0E13 /* glerror.cpp */,
-				0CF6FBD8203122EF00CC0E13 /* glerror.h */,
+				0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */,
+				0CF6FBD8203122EF00CC0E13 /* gldebug.h */,
 			);
 			path = "opengl-tutorial-tbb";
 			sourceTree = "<group>";
@@ -144,6 +150,8 @@
 		0CAFDBC52030C0DE0074AB4E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0C29615E2031DDF6009A1145 /* debugShader.fs */,
+				0C29615F2031DDF6009A1145 /* debugShader.vs */,
 				0CAFDBC62030C17A0074AB4E /* basicShader.vs */,
 				0CAFDBC72030C1AB0074AB4E /* basicShader.fs */,
 			);
@@ -211,7 +219,7 @@
 				0C93A7D0203018CE00FCCDDD /* display.cpp in Sources */,
 				0CAFDBCB2030C9EC0074AB4E /* mesh.cpp in Sources */,
 				0CA5477B203088790065F0BE /* main.cpp in Sources */,
-				0CF6FBD7203121FB00CC0E13 /* glerror.cpp in Sources */,
+				0CF6FBD7203121FB00CC0E13 /* gldebug.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +342,7 @@
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "../opengl-tutorial-tbb-dependencies/lib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = x86_64;
+				"WARNING_CFLAGS[arch=*]" = "-Wdocumentation";
 			};
 			name = Debug;
 		};
@@ -349,6 +358,7 @@
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "../opengl-tutorial-tbb-dependencies/lib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = x86_64;
+				"WARNING_CFLAGS[arch=*]" = "-Wdocumentation";
 			};
 			name = Release;
 		};

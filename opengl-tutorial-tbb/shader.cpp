@@ -4,24 +4,26 @@
 //
 
 #include "shader.h"
-#include "glerror.h"
+#include "gldebug.h"
 #include <iostream>
 #include <fstream>
 
-Shader::Shader(const std::string& fileName) {
+Shader::Shader(const std::string& fileName)
+{
     m_program = glCreateProgram();
     m_shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
     m_shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
     
     for(unsigned int i = 0; i < NUM_SHADERS; i++)
-        glAttachShader(m_program, m_shaders[i]);
+    {
+        GLCall(glAttachShader(m_program, m_shaders[i]));
+    }
     
     glLinkProgram(m_program);
     CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");
     
     glValidateProgram(m_program);
     CheckShaderError(m_program, GL_LINK_STATUS, true, "Invalid shader program");
-
 }
 
 Shader::~Shader()
@@ -49,13 +51,12 @@ GLuint Shader::CreateShader(const std::string& text, unsigned int type)
     const GLchar* p[1];
     p[0] = text.c_str();
     GLint lengths[1];
-    lengths[0] = text.length();
+    lengths[0] = static_cast<GLint>(text.length());
     
     GLCall(glShaderSource(shader, 1, p, lengths));
     glCompileShader(shader);
     
     CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error compiling shader!");
-    
     return shader;
 }
 
@@ -66,12 +67,15 @@ std::string Shader::LoadShader(const std::string& fileName) {
     std::string output;
     std::string line;
     
-    if (file.is_open()) {
-        while (file.good()) {
+    if (file.is_open())
+    {
+        while (file.good())
+        {
             getline(file, line);
             output.append(line + "\n");
         }
-    } else {
+    } else
+    {
         std::cerr << "Unable to load shader: " << fileName << std::endl;
     }
     
@@ -87,7 +91,8 @@ void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const 
     else
         glGetShaderiv(shader, flag, &success);
     
-    if (success == GL_FALSE) {
+    if (success == GL_FALSE)
+    {
         if (isProgram)
             glGetProgramInfoLog(shader, sizeof(error), NULL, error);
         else
