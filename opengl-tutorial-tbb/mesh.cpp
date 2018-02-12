@@ -9,7 +9,7 @@
 Mesh::Mesh(Vertex vertices[], unsigned int numVertices) {
     m_drawCount = numVertices;
     
-    GLCall(glGenVertexArraysAPPLE(-1, &m_vertexArrayObject));
+    GLCall(glGenVertexArraysAPPLE(1, &m_vertexArrayObject));
     GLCall(glBindVertexArrayAPPLE(m_vertexArrayObject));
     
     GLCall(glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers));
