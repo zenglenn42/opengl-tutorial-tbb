@@ -96,7 +96,7 @@ In the process, I picked up some debug strategies that should serve me nicely go
 
 * Crafted debug [vertex](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.vs) and [fragment](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.fs) shaders that allow easy overrides for incoming and outgoing variables.
 
-Even after deploying [theCherno's debug fu](https://www.youtube.com/watch?v=FBbPWSOQ0-w&index=10&list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2) and wrangling community suggestions, I still had a blank window after a full day of effort.  In the morning, I realized I didn't know if the issue was on the CPU or GPU side.  Was there a problem with the mesh vertices getting sent down?  Was it some backlevel driver weirdness on macOS?
+Even after deploying [theCherno's debug fu](https://www.youtube.com/watch?v=FBbPWSOQ0-w&index=10&list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2) and wrangling community suggestions, I still had a blank window after a full day of effort.  In the morning, I realized I didn't know if the issue was on the CPU or GPU side.  Was there a problem with the mesh vertices getting sent down?  Was it some backlevel driver weirdness on macOS?  Were the shaders even firing?  I mean, I *think* they're firing.  I don't see any compile or link errors along that path.  But how could I test that?  With some stripped down shaders, I could tweak the fragment color
 
 Even with the skeleton shaders, my render window was blank, so I shifted my focus upstream to the CPU side.  I dropped the mesh vertices array from the tutorial and just made my own legacy mesh using the fixed pipeline idiom:
 
@@ -109,8 +109,8 @@ Still, no joy.
 
 I punted on GL_TRIANGLES and opted for GL_LINES and /finally/ got something on the screen.  
 
-But even that was a bit rough for dumb reasons ... me forgetting that you need pairs of vertices to draw one line segment as opposed to a mistaken connect-the-dots assumption about how that worked.  Oddly, that also got me looking into controlling line color at the shader level.  That led to discussions of gl_FrontColor and gl_BackColor within the GLSL shader language and backed me into the crucial realization that front-facing meshes are specified with vertices in /counter-clockwise/ order and in the tutorial, they're specified in /clockwise/ order (which is probably anti-pattern).
+But even that was a bit rough for dumb reasons ... me forgetting that you need pairs of vertices to draw one line segment as opposed to a mistaken connect-the-dots assumption about how that worked.  Oddly, that also got me looking into controlling line color at the shader level.  That led to discussions of gl_FrontColor and gl_BackColor within the GLSL shader language and backed me into the crucial realization that front-facing meshes are specified with vertices in *counter-clockwise* order and in the tutorial, they're specified in *clockwise* order (which is probably anti-pattern).
 
 If I had just recreated the live display.cpp code from the youtube tutorial, the vertex ordering would not be an issue. But I kinda mixed and matched live code with stuff I pulled from the uplevel [github repo](https://github.com/BennyQBD/ModernOpenGLTutorial/blob/master/display.cpp#L29).  In the repo code, culling of GL_BACK vertices had been enabled which then culled the clockwise-ordered vertices in the live code of main().
 
-Some clouds have lifted and light now streams in, gracing my keyboard and spirits.
+Some clouds have lifted and [light now plays with shadow](http://glslsandbox.com/e#44945.0), gracing my keyboard and spirits.
