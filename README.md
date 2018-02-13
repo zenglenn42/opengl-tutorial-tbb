@@ -112,7 +112,7 @@ gl_Position = ftransform();
 
 Still, no joy.
 
-I punt on GL_TRIANGLES and opt for GL_LINES and /finally/ got something on the screen.  
+I punt on GL_TRIANGLES and opt for GL_LINES and /finally/ get something on the screen.  
 
 But even that is a bit rough for dumb reasons ... me forgetting that you need pairs of vertices to draw one line segment as opposed to a mistaken connect-the-dots assumption about how that works.  Oddly, that also got me looking into controlling line color at the shader level.  That leads to discussions of gl_FrontColor and gl_BackColor within the GLSL shader language and backs me into the crucial realization that front-facing meshes are specified with vertices in *counter-clockwise* order and in the tutorial, they're specified in *clockwise* order (which is probably anti-pattern).
 
