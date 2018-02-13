@@ -18,10 +18,10 @@ I've included some Xcode project files in my repo, but they assume the following
 
 To accomplish this, I downloaded the following src zip files:
 
-	* [SDL2-2.0.7.zip](http://www.libsdl.org/release/SDL2-2.0.7.zip)
-	* glew-2.1.0.zip
-	* glm-0.9.8.5.zip
-	* debugbreak-7ee9b29.zip (https://github.com/scottt/debugbreak)
+	* SDL2-2.0.7.zip  http://www.libsdl.org/release/SDL2-2.0.7.zip
+	* glew-2.1.0.zip  https://sourceforge.net/projects/glew/files/glew/2.1.0/glew-2.1.0.zip/download
+	* glm-0.9.8.5.zip https://github.com/g-truc/glm/archive/0.9.8.5.zip
+	* debugbreak-7ee9b29.zip https://github.com/scottt/debugbreak
 
 and staged them under:
 
