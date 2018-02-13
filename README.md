@@ -127,3 +127,4 @@ Now I backout of my debug paths entirely and user my cleaned-up version of the l
 the product of nice c++ abstraction, a programmable gpu pipeline, and a modern windowing sdk (SDL2).
 
 Some clouds lift. [Light now plays with shadow](http://glslsandbox.com/e#44945.0), gracing my keyboard and spirits.
+
