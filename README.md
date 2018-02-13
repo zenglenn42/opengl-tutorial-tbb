@@ -137,14 +137,14 @@ Some clouds lift. [Light now plays with shadow](http://glslsandbox.com/e#44945.0
 
 # Okay, but how do I make all this work with my models?
 
-... especially since my previous OpenGL work relied the GLUT layer I'm trying to deprecate for modeling primitives like glutSolidCone.
+... especially since my previous OpenGL work relied upon the GLUT layer I'm trying to deprecate for modeling primitives like glutSolidCone.
 
 I'm tempted to take a diversion through a few threads so I can render a 3D cone in retained mode instead of a humble triangle.
 
 Specificially,
 
-	* [immediate-to-retained-mode](https://stackoverflow.com/questions/6733934/what-does-immediate-mode-mean-in-opengl)
-	* [display-list-to-vbo](https://stackoverflow.com/questions/26189645/opengl-convert-from-displaylist-to-use-vbo)
-        * [computing-cone-surface-normals](https://stackoverflow.com/questions/19245363/opengl-glut-surface-normals-of-cone)
+   [immediate-to-retained-mode](https://stackoverflow.com/questions/6733934/what-does-immediate-mode-mean-in-opengl)
+   [display-list-to-vbo](https://stackoverflow.com/questions/26189645/opengl-convert-from-displaylist-to-use-vbo)
+   [computing-cone-surface-normals](https://stackoverflow.com/questions/19245363/opengl-glut-surface-normals-of-cone)
 
-seem nutrient dense for my purposes.  Hmmm, that looks like a bit of work. :D  Not sure if I'm ready for all that kodified-kale just yet, but that's in the back of my mind as I reach for the Téo Cookies & Cream Gelato and press play on the next tutorial.
+seem nutrient dense for my purposes.  Hmmm, that looks like a bit of work. Not sure if I'm ready for all that kodified-kale just yet, but that's in the back of my mind as I reach for the Téo Gelato and press play on the next tutorial.
