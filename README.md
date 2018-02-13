@@ -18,7 +18,7 @@ I've included some Xcode project files in my repo, but they assume the following
 
 To accomplish this, I downloaded the following src zip files:
 
-	* SDL2-2.0.7.zip
+	* [SDL2-2.0.7.zip](http://www.libsdl.org/release/SDL2-2.0.7.zip)
 	* glew-2.1.0.zip
 	* glm-0.9.8.5.zip
 	* debugbreak-7ee9b29.zip (https://github.com/scottt/debugbreak)
@@ -48,6 +48,8 @@ Cutting to the chase, I discover two issues:
 	* main.cpp main() vertices specified in clockwise order were getting culled by uplevel display.cpp from github.
 
 I fix the first issue in display.cpp by enabling glewExperimental:
+
+![alt tag](img/tutorial-3.5-rtbreak.png)
 
 ```
 display.cpp
@@ -116,6 +118,14 @@ I punt on GL_TRIANGLES and opt for GL_LINES and /finally/ get something on the s
 
 But even that is a bit rough for dumb reasons ... me forgetting that you need pairs of vertices to draw one line segment as opposed to a mistaken connect-the-dots assumption about how that works.  Oddly, that also gets me looking into controlling line color at the shader level.  That leads to discussions of gl_FrontColor and gl_BackColor within the GLSL shader language and backs me into the crucial realization that front-facing meshes are specified with vertices in *counter-clockwise* order and in the tutorial they're specified in *clockwise* order (which is probably anti-pattern).
 
-If I had just recreated the live display.cpp code from the youtube tutorial, the vertex ordering would not be an issue since there is no vertex culling in *that* code. But I kinda mix and match live code with stuff I pull from the uplevel [github repo](https://github.com/BennyQBD/ModernOpenGLTutorial/blob/master/display.cpp#L29).  In the repo code, culling of GL_BACK vertices is enabled, killing off the clockwise-ordered mesh of vertices in the live code of main().  Once I realize that, the red triangle appears, the product of nice c++ abstraction, a programmable gpu pipeline, and a modern windowing sdk (SDL2).
+If I had just recreated the live display.cpp code from the youtube tutorial, the vertex ordering would not be an issue since there is no vertex culling in *that* code. But I kinda mix and match live code with stuff I pull from the uplevel [github repo](https://github.com/BennyQBD/ModernOpenGLTutorial/blob/master/display.cpp#L29).  In the repo code, culling of GL_BACK vertices is enabled, killing off the clockwise-ordered mesh of vertices in the live code of main().  Once I realize that, I revert back to my dummied-up GL_TRIANGLES and relize I've made the same mistake of specifying them in clockwise order.  Once I move them to counter-clockwise, I'm rewarded with a green triange courtesy my debug shaders:
+
+![alt tag](img/tutorial-3.5-gldebug.png)
+
+Now I backout of my debug paths entirely and user my cleaned-up version of the live code from the tutorial video and the red triangle now appears:
+
+![alt tag](img/tutorial-3.5-red.png)
+
+the product of nice c++ abstraction, a programmable gpu pipeline, and a modern windowing sdk (SDL2).
 
 Some clouds lift. [Light now plays with shadow](http://glslsandbox.com/e#44945.0), gracing my keyboard and spirits.
