@@ -88,8 +88,6 @@ main.cpp
     };
 ```
 
-![alt tag](img/tutorial-3.5.png)
-
 In the process, I pick up some debug strategies that should serve me nicely going forward:
 
 * Leverage Yan Cherno's [GLCall() wrapper](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/opengl-tutorial-tbb/gldebug.h) that breaks to the debugger when glError complains.
