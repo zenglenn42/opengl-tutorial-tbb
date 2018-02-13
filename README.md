@@ -64,7 +64,7 @@ display.cpp
     ...
 ```
 
-I fix the second issue by reording the verties in counter-clockwise order:
+I fix the second issue by reording the verties in counter-clockwise order so they are interpreted as front-facing:
 
 ```
 main.cpp
