@@ -40,14 +40,14 @@ Strangely, my first attempt at running the wafer-thin example code that just bri
 
 Lightness and dark, a metaphor for life and opengl programming.  You type the code in perfectly and are rewarded with an empty rendering window.  It's a dark alley and you're not sure how to proceed.
 
-I double checked the code, started reading the comment section of the youtube video, and looked for general strategies for OpenGL debugging, then slept on it so my subconcious could churn away on the mystery.
+I double check the code, start reading the comment section of the youtube video, and look for general strategies for OpenGL debugging, then sleep on it so my subconcious could churn away on the mystery.
 
-Cutting to the chase, I hit two issues:
+Cutting to the chase, I discover two issues:
 
 	* mesh.cpp Mesh::Mesh constructor fails in glGenVertexArrays() with EXC_BAD_ACCESS
 	* main.cpp main() vertices specified in clockwise order were getting culled by uplevel display.cpp from github.
 
-I fixed the first issue in display.cpp by enabling glewExperimental:
+I fix the first issue in display.cpp by enabling glewExperimental:
 
 ```
 display.cpp
@@ -64,7 +64,7 @@ display.cpp
     ...
 ```
 
-I fixed the second issue by reording the verties in counter-clockwise order:
+I fix the second issue by reording the verties in counter-clockwise order:
 
 ```
 main.cpp
@@ -88,29 +88,34 @@ main.cpp
 
 ![alt tag](img/tutorial-3.5.png)
 
-In the process, I picked up some debug strategies that should serve me nicely going forward:
+In the process, I pick up some debug strategies that should serve me nicely going forward:
 
-* Leveraged Yan Cherno's [GLCall() wrapper](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/opengl-tutorial-tbb/gldebug.h) that breaks to the debugger when glError complains.
+* Leverage Yan Cherno's [GLCall() wrapper](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/opengl-tutorial-tbb/gldebug.h) that breaks to the debugger when glError complains.
 
-* Used Scott Tsai's [debug_break()](https://github.com/scottt/debugbreak) function to extend GLCall to gcc, clang, and msvc compilers.
+* Use Scott Tsai's [debug_break()](https://github.com/scottt/debugbreak) function to extend GLCall to gcc, clang, and msvc compilers.
 
-* Crafted debug [vertex](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.vs) and [fragment](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.fs) shaders that allow easy overrides for incoming and outgoing variables.
+* Craft debug [vertex](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.vs) and [fragment](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.fs) shaders that allow easy overrides for incoming and outgoing variables.
 
-Even after deploying [theCherno's debug fu](https://www.youtube.com/watch?v=FBbPWSOQ0-w&index=10&list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2) and wrangling community suggestions, I still had a blank window after a full day of effort.  In the morning, I realized I didn't know if the issue was on the CPU or GPU side.  Was there a problem with the mesh vertices getting sent down?  Was it some backlevel driver weirdness on macOS?  Were the shaders even firing?  I mean, I *think* they're firing.  I don't see any compile or link errors along that path.  But how could I test that?  With some stripped down shaders, I could tweak the fragment color
-
-Even with the skeleton shaders, my render window was blank, so I shifted my focus upstream to the CPU side.  I dropped the mesh vertices array from the tutorial and just made my own legacy mesh using the fixed pipeline idiom:
+Even after deploying [theCherno's debug fu](https://www.youtube.com/watch?v=FBbPWSOQ0-w&index=10&list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2) and wrangling community suggestions, I still have a blank window after a full day of effort.  In the morning, I realize I don't know if the issue is on the CPU or GPU side.  Is there a problem with the mesh vertices getting sent down?  Backlevel driver weirdness on macOS?  Are the shaders even *firing*?  I mean, I *think* they're firing.  I don't see any compile or link errors along that path.  But how could I test that?  With some stripped down shaders, I could hardcode the fragment color and should a new color to my blank window ... yeah, that works.  So I sift focus to the CPU side, dropping the mesh vertices array from the tutorial code and just wedging in my own legacy mesh triangle using the classic fixed-pipeline idiom:
 
 ```
 glBegin(GL_TRIANGES);
 glVertex3f(); glVertex3f(); glVertex3f();
 glEnd();
 ```
+
+This is facilitated in the debug vertex shader by calling ftransform:
+
+```
+gl_Position = ftransform();
+```
+
 Still, no joy.
 
-I punted on GL_TRIANGLES and opted for GL_LINES and /finally/ got something on the screen.  
+I punt on GL_TRIANGLES and opted for GL_LINES and /finally/ got something on the screen.  
 
-But even that was a bit rough for dumb reasons ... me forgetting that you need pairs of vertices to draw one line segment as opposed to a mistaken connect-the-dots assumption about how that worked.  Oddly, that also got me looking into controlling line color at the shader level.  That led to discussions of gl_FrontColor and gl_BackColor within the GLSL shader language and backed me into the crucial realization that front-facing meshes are specified with vertices in *counter-clockwise* order and in the tutorial, they're specified in *clockwise* order (which is probably anti-pattern).
+But even that is a bit rough for dumb reasons ... me forgetting that you need pairs of vertices to draw one line segment as opposed to a mistaken connect-the-dots assumption about how that works.  Oddly, that also got me looking into controlling line color at the shader level.  That leads to discussions of gl_FrontColor and gl_BackColor within the GLSL shader language and backs me into the crucial realization that front-facing meshes are specified with vertices in *counter-clockwise* order and in the tutorial, they're specified in *clockwise* order (which is probably anti-pattern).
 
-If I had just recreated the live display.cpp code from the youtube tutorial, the vertex ordering would not be an issue. But I kinda mixed and matched live code with stuff I pulled from the uplevel [github repo](https://github.com/BennyQBD/ModernOpenGLTutorial/blob/master/display.cpp#L29).  In the repo code, culling of GL_BACK vertices had been enabled which then culled the clockwise-ordered vertices in the live code of main().
+If I had just recreate the live display.cpp code from the youtube tutorial, the vertex ordering would not be an issue. But I kinda mix and match live code with stuff I pull from the uplevel [github repo](https://github.com/BennyQBD/ModernOpenGLTutorial/blob/master/display.cpp#L29).  In the repo code, culling of GL_BACK vertices is enabled, killing off the clockwise-ordered mesh of vertices in the live code of main().
 
-Some clouds have lifted and [light now plays with shadow](http://glslsandbox.com/e#44945.0), gracing my keyboard and spirits.
+Some clouds lift. [Light now plays with shadow](http://glslsandbox.com/e#44945.0), gracing my keyboard and spirits.
