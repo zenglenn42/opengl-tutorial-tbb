@@ -96,11 +96,18 @@ In the process, I pick up some debug strategies that should serve me nicely goin
 
 * Craft debug [vertex](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.vs) and [fragment](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/Resources/debugShader.fs) shaders that allow easy overrides for incoming and outgoing variables.
 
-Even after deploying [theCherno's debug fu](https://www.youtube.com/watch?v=FBbPWSOQ0-w&index=10&list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2) and wrangling community suggestions, I still have a blank window after a full day of effort.  In the morning, I realize I don't know if the issue is on the CPU or GPU side.  Is there a problem with the mesh vertices getting sent down?  Backlevel driver weirdness on macOS?  Are the shaders even *firing*?  I mean, I *think* they're firing.  I don't see any compile or link errors along that path.  But how could I test that?  With some stripped down shaders, I can hardcode the fragment color and should see a new color to my blank window ... yeah, that works.  So I shift focus to the CPU side, dropping the mesh vertices array from the tutorial code and just wedging in my own legacy mesh triangle using the classic fixed-pipeline idiom:
+Even after deploying [theCherno's debug fu](https://www.youtube.com/watch?v=FBbPWSOQ0-w&index=10&list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2) and wrangling community suggestions, I still have a blank window after a full day of effort.  In the morning, I realize I don't know if the issue is on the CPU or GPU side.  Is there a problem with the mesh vertices getting sent down?  Backlevel driver weirdness on macOS?  Are the shaders even *firing*?  I mean, I *think* they're firing.  I don't see any compile or link errors along that path.  But how could I test that?  With some stripped down shaders, I can hardcode the fragment color and should see a new color to my blank window ... yeah, that works.  So I shift focus to the CPU side, dropping the mesh vertices array from the tutorial code and just wedging in my own legacy mesh triangle using the classic [immediate-mode](https://stackoverflow.com/questions/6733934/what-does-immediate-mode-mean-in-opengl) idiom:
 
 ```
 glBegin(GL_TRIANGES);
-glVertex3f(); glVertex3f(); glVertex3f();
+   // Heads-up: Notice the clockwise ordering?
+   //
+   //           This will be interpreted as the 
+   //           back face of the triangle by default
+   //           by OpenGL. :-/
+   glVertex3f(-0.5f, -0.5f, 0.0f); 
+   glVertex3f(0.0f, 0.5f, 0.0f); 
+   glVertex3f(0.5f, -0.5f, 0.0f);
 glEnd();
 ```
 
@@ -124,7 +131,7 @@ Now I backout of my debug paths entirely and use my cleaned-up version of the li
 
 ![alt tag](img/tutorial-3.5-red.png)
 
-the product of nice c++ abstraction, a programmable gpu pipeline, and a modern windowing sdk (SDL2).
+the product of nice c++ abstraction, gpu-efficient [retained-mode](https://stackoverflow.com/questions/6733934/what-does-immediate-mode-mean-in-opengl) programmable pipeline, and a modern windowing sdk (SDL2).
 
 Some clouds lift. [Light now plays with shadow](http://glslsandbox.com/e#44945.0), gracing my keyboard and spirits.
 
