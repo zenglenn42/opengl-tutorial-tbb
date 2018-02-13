@@ -141,7 +141,7 @@ Some clouds lift. [Light now plays with shadow](http://glslsandbox.com/e#44945.0
 
 I'm tempted to take a diversion through a few threads so I can render a 3D cone in retained mode instead of a humble triangle.
 
-Specificially,
+Specifically,
 
 [immediate-to-retained-mode](https://stackoverflow.com/questions/6733934/what-does-immediate-mode-mean-in-opengl)
 
