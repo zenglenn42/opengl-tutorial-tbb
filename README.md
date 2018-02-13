@@ -120,7 +120,7 @@ If I had just recreated the live display.cpp code from the youtube tutorial, the
 
 ![alt tag](img/tutorial-3.5-gldebug.png)
 
-Now I backout of my debug paths entirely and user my cleaned-up version of the live code from the tutorial video and the red triangle now appears:
+Now I backout of my debug paths entirely and use my cleaned-up version of the live code from the tutorial video and the coveted red triangle now appears:
 
 ![alt tag](img/tutorial-3.5-red.png)
 
