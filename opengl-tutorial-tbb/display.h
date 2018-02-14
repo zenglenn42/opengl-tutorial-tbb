@@ -3,8 +3,8 @@
 //  opengl-tutorial-tbb
 //
 
-#ifndef DISPLAY_INCLUDED_H
-#define DISPLAY_INCLUDED_H
+#ifndef DISPLAY_H
+#define DISPLAY_H
 
 #include <string>
 #include <SDL2/SDL.h>

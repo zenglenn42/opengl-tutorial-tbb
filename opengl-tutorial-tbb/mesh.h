@@ -7,6 +7,12 @@
 #define MESH_H
 
 #include <glm/glm.hpp>
+
+// Strictly speaking we should only need OpenGL/gl.h here, however
+// this tutorial employs the same header for consumer and implementer
+// code.  The private implementation, mesh.cpp, needs glew.h for
+// glGenVertexArrays & glBindVertexArray.
+
 #include <GL/glew.h>
 
 class Vertex

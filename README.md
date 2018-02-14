@@ -141,7 +141,7 @@ Some clouds lift. [Light now plays with shadow](http://glslsandbox.com/e#44945.0
 
 I'm tempted to take a diversion through a few threads so I can render a 3D cone in retained mode instead of a humble triangle.
 
-Specifically,
+Specifically, these threads
 
 [immediate-to-retained-mode](https://stackoverflow.com/questions/6733934/what-does-immediate-mode-mean-in-opengl)
 
@@ -150,6 +150,8 @@ Specifically,
 [retained-mode-history-lesson](https://stackoverflow.com/questions/21652546/what-is-the-role-of-glbindvertexarrays-vs-glbindbuffer-and-what-is-their-relatio)
 
 [computing-cone-surface-normals](https://stackoverflow.com/questions/19245363/opengl-glut-surface-normals-of-cone)
+
+[cross-platform-opengl-headers](https://stackoverflow.com/questions/3907818/opengl-headers-for-os-x-linux)
 
 seem nutrient dense for my purposes.  Hmmm, that looks like a bit of work. Not sure if I'm ready for all that kodified-kale just yet, but that's in the back of my mind as I reach for the Téo Gelato and press play on the next tutorial.
 

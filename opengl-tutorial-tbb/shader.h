@@ -3,8 +3,8 @@
 //  opengl-tutorial-tbb
 //
 
-#ifndef SHADER_INCLUDED_H
-#define SHADER_INCLUDED_H
+#ifndef SHADER_H
+#define SHADER_H
 
 #include <string>
 #include <GL/glew.h>
@@ -31,4 +31,4 @@ private:
     GLuint m_shaders[NUM_SHADERS];
 };
 
-#endif /* SHADER_INCLUDED_H */
+#endif /* SHADER_H */
