@@ -10,7 +10,7 @@
 // If that works, then start tweaking the code to enable more of the
 // non-debug code until you see a failure and can debug /that/.
 //
-//#define GLDEBUG         // Should produce green triangle when defined.
+#define GLDEBUG         // Should produce green triangle when defined.
 
 #include <iostream>
 #include "display.h"
@@ -20,7 +20,7 @@
 
 int main(int argc, char** argv)
 {
-    Display display(800, 600, "Hello World!");
+    Display display(600, 600, "Hello World!");
     
     Vertex vertices[] =
     {
