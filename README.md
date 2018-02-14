@@ -161,3 +161,4 @@ Went ahead and cleaned up a programmatic model of a cone based upon triangle fan
 
 ![alt tag](img/cone-topview.png)
 
+This is a view from the top, so it appears as a circle in two dimensions.
