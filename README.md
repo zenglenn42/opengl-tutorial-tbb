@@ -160,3 +160,4 @@ Huh, maybe I can use [gluCylinder](http://pyopengl.sourceforge.net/documentation
 Went ahead and cleaned up a programmatic model of a cone based upon triangle fans.  It's still immediate mode, but gets me closer to something that will load up into a vertex buffer object.
 
 ![alt tag](img/cone-topview.png)
+
