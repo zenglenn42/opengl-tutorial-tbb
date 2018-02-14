@@ -50,6 +50,9 @@ dep_BUILD_DIR   = $(top_DIR)/../$(PROJECT)-build-dependencies
 
 #---------------
 # glew-2.1.0.zip
+#
+# https://sourceforge.net/projects/glew/files/glew/2.1.0/glew-2.1.0.zip/download
+# OpenGL extension wranger.  Cross-platform open-source extension loading library.
 #---------------
 glew_VERSION = 2.1.0
 glew_SRC_ZIP = $(dep_ZIP_DIR)/glew-$(glew_VERSION).zip
@@ -61,6 +64,9 @@ glew_Install = $(glew_PREFIX)/include/GL/glew.h
 
 #----------------
 # glm-0.9.8.5.zip
+#
+# https://github.com/g-truc/glm/archive/0.9.8.5.zip
+# OpenGL-friendly mathematics library.
 #----------------
 glm_VERSION = 0.9.8.5
 glm_SRC_ZIP = $(dep_ZIP_DIR)/glm-$(glm_VERSION).zip
@@ -72,6 +78,9 @@ glm_Install = $(glm_PREFIX)/include/glm/glm.hpp
 
 #----------------
 # SDL2-2.0.7.zip
+#
+# https://www.libsdl.org/release/SDL2-2.0.7.zip
+# Portable windowing/media layer for graphics apps, etc.
 #----------------
 sdl2_VERSION = 2.0.7
 sdl2_SRC_ZIP = $(dep_ZIP_DIR)/SDL2-$(sdl2_VERSION).zip
@@ -83,6 +92,9 @@ sdl2_Install = $(sdl2_PREFIX)/include/SDL2/SDL.h
 
 #-----------------------
 # debugbreak-7ee9b29.zip
+#
+# https://github.com/scottt/debugbreak
+# Break to the debugger at runtime.
 #-----------------------
 debugbreak_VERSION = 7ee9b29
 debugbreak_SRC_ZIP = $(dep_ZIP_DIR)/debugbreak-$(debugbreak_VERSION).zip
@@ -93,15 +105,33 @@ debugbreak_Build   = $(debugbreak_BLD_DIR)/debugbreak.h
 debugbreak_IDIR    = $(debugbreak_PREFIX)/include/debugbreak
 debugbreak_Install = $(debugbreak_IDIR)/debugbreak.h
 
-default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build) $(debugbreak_Build)
+#-----------------------
+# stb-e6afb9c.zip
+#
+# https://github.com/nothings/stb
+# Includes primitives for loading texture images.
+#-----------------------
+stb_VERSION = e6afb9c
+stb_SRC_ZIP = $(dep_ZIP_DIR)/stb-$(stb_VERSION).zip
+stb_SRC_DIR = $(dep_BUILD_DIR)/stb-master
+stb_PREFIX  = $(dep_INSTALL_DIR)
+stb_BLD_DIR = $(stb_SRC_DIR)
+stb_Build   = $(stb_BLD_DIR)/stb.h
+stb_IDIR    = $(stb_PREFIX)/include/stb
+# Specify headers to install from BLD_DIR.
+stb_Headers = stb.h stb_image.h
+stb_Install = $(patsubst %, $(stb_IDIR)/%, $(stb_Headers))
+
+default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build) $(debugbreak_Build) $(stb_Build)
 
 .PHONY: glew glm sdl2
 glew: $(dep_BUILD_DIR) $(glew_Build) $(dep_INSTALL_DIR) $(glew_Install)
 glm: $(dep_BUILD_DIR) $(glm_Build) $(dep_INSTALL_DIR) $(glm_Install)
 sdl2: $(dep_BUILD_DIR) $(sdl2_Build) $(dep_INSTALL_DIR) $(sdl2_Install)
 debugbreak: $(dep_BUILD_DIR) $(debugbreak_Build) $(dep_INSTALL_DIR) $(debugbreak_Install)
+stb: $(dep_BUILD_DIR) $(stb_Build) $(dep_INSTALL_DIR) $(stb_Install)
 
-$(dep_BUILD_DIR) $(dep_INSTALL_DIR) $(debugbreak_IDIR):
+$(dep_BUILD_DIR) $(dep_INSTALL_DIR) $(debugbreak_IDIR) $(stb_IDIR):
 	mkdir -p $@
 
 unzip_CURRENT_TIME = -DD
@@ -123,6 +153,10 @@ debugbreak_Unpack = $(debugbreak_SRC_DIR)/GNUmakefile
 $(debugbreak_Unpack): $(debugbreak_SRC_ZIP)
 	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(debugbreak_SRC_ZIP)
 
+stb_Unpack = $(stb_SRC_DIR)/README.md
+$(stb_Unpack): $(stb_SRC_ZIP)
+	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(stb_SRC_ZIP)
+
 $(glew_Build): $(glew_Unpack)
 	cd $(glew_SRC_DIR) && $(MAKE) GLEW_PREFIX=$(glew_PREFIX) GLEW_DEST=$(glew_DEST)
 
@@ -136,7 +170,10 @@ $(sdl2_Build): $(sdl2_Unpack)
 $(debugbreak_Build): $(debugbreak_Unpack)
 	cd $(debugbreak_SRC_DIR) && $(MAKE)
 
-install: $(dep_INSTALL_DIR) $(glew_Install) $(glm_Install) $(sdl2_Install) $(debugbreak_Install)
+$(stb_Build): $(stb_Unpack)
+	@echo "Nothing to build for stb :-)"
+
+install: $(dep_INSTALL_DIR) $(glew_Install) $(glm_Install) $(sdl2_Install) $(debugbreak_Install) $(stb_Install)
 
 $(glew_Install):
 	cd $(glew_SRC_DIR) && $(MAKE) install GLEW_PREFIX=$(glew_PREFIX) GLEW_DEST=$(glew_DEST)
@@ -149,6 +186,9 @@ $(sdl2_Install):
 
 $(debugbreak_Install): | $(debugbreak_IDIR)
 	cp $(debugbreak_Build) $(debugbreak_IDIR)
+
+$(stb_Install): | $(stb_IDIR)
+	cd $(stb_BLD_DIR) && cp $(@F) $@
 
 .PHONY: clean
 clean:
