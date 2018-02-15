@@ -189,7 +189,7 @@ I'm liking this [menagerie](http://theactingcompany.org/plays/2017-18-season/the
 
 # Texture Tutorial Reprise
 
-It bugged me that I couldn't get the live tutorial code working, so I rewatched the video and got things working.  I've still got the alternate implementation checked in, but switched off with this macro in main.cpp:
+It bugged me that I couldn't get the live tutorial code working, so I rewatched the video and managed to fixed that.  I've still got the alternate implementation checked in.  It's just a conditional compile away by commenting out this macro in main.cpp:
 
 ```
 #define TUTORIAL_IMPLEMENTATION
@@ -206,7 +206,7 @@ The alternate implementation (courtesy Donovan Green) uses a single data buffer 
 
 # Model Transform Tutorial
 
-Okay, so now we have a nice class for translating, rotating, and scaling our models by leveraging a transform uniform variable in our vertex shader.  The uniform is updated on the CPU side between draw invocations and picked up by the vertex shader where it mutates gl_Position.
+Okay, so now we have a nice class for translating, rotating, and scaling our models by leveraging a transform uniform variable in our vertex shader.  The uniform is updated on the CPU side between draw invocations and is picked up by the vertex shader where it mutates gl_Position:
 
 basicShader.vs
 
