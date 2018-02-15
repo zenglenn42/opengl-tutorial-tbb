@@ -165,7 +165,7 @@ Went ahead and cleaned up a programmatic model of a cone based upon triangle fan
 
 This is a view from the top, so it appears as a circle in two dimensions.
 
-# All you stone doritos are belong to us
+# All your stoned doritos are belong to us!
 
 Worked through thebennybox's [Tutorial 4 OpenGL Textures](https://www.youtube.com/watch?v=17axYo6mKhY&list=PLEETnX-uPtBXT9T-hD0Bj31DSnwio-ywh&index=9).
 
