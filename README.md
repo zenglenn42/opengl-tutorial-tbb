@@ -22,7 +22,7 @@ To accomplish this, I downloaded the following src zip files:
 	* glew-2.1.0.zip  https://sourceforge.net/projects/glew/files/glew/2.1.0/glew-2.1.0.zip/download
 	* glm-0.9.8.5.zip https://github.com/g-truc/glm/archive/0.9.8.5.zip
 	* debugbreak-7ee9b29.zip https://github.com/scottt/debugbreak
-        * stb-36afb9c.zip https://github.com/nothings/stb
+	* stb-36afb9c.zip https://github.com/nothings/stb
 
 and staged them under:
 
