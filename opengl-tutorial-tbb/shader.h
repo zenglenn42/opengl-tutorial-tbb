@@ -6,6 +6,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include "transform.h"
 #include <string>
 #include <GL/glew.h>
 
@@ -14,6 +15,7 @@ public:
     Shader(const std::string& fileName);
     
     void Bind();
+    void Update(const Transform& transform);
     
     virtual ~Shader();
     
@@ -27,8 +29,14 @@ private:
     void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
     GLuint CreateShader(const std::string& text, unsigned int type);
 
+    enum {
+        TRANSFORM_U,
+        NUM_UNIFORMS
+    };
+    
     GLuint m_program;
     GLuint m_shaders[NUM_SHADERS];
+    GLuint m_uniforms[NUM_UNIFORMS];
 };
 
 #endif /* SHADER_H */

@@ -82,6 +82,7 @@
 		0CAFDBC72030C1AB0074AB4E /* basicShader.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = basicShader.fs; sourceTree = "<group>"; };
 		0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
 		0CAFDBCC2030CA1E0074AB4E /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
+		0CDC37932036174400F421A7 /* transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transform.h; sourceTree = "<group>"; };
 		0CEC6F572035EAA1008BE2B8 /* altShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = altShader.vs; sourceTree = "<group>"; };
 		0CEC6F582035EAA2008BE2B8 /* altShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = altShader.fs; sourceTree = "<group>"; };
 		0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gldebug.cpp; sourceTree = "<group>"; };
@@ -139,6 +140,7 @@
 				0C703CDE2034D36000FFBF49 /* texture.h */,
 				0C703CDC2034D2A600FFBF49 /* texture.cpp */,
 				0CAFDBCC2030CA1E0074AB4E /* mesh.h */,
+				0CDC37932036174400F421A7 /* transform.h */,
 				0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */,
 				0CF6FBD8203122EF00CC0E13 /* gldebug.h */,
 				0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */,

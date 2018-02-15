@@ -203,3 +203,31 @@ int main()
 The main difference is the tutorial video employs multiple data buffers segregated by attribute (i.e., position versus texture coordinate).
 
 The alternate implementation (courtesy Donovan Green) uses a single data buffer described to the shaders with slightly fancier vertex attribute pointers.
+
+# Model Transform Tutorial
+
+Okay, so now we have a nice class for translating, rotating, and scaling our models by leveraging a transform uniform variable in our vertex shader.  The uniform is updated on the CPU side between draw invocations and picked up by the vertex shader where it mutates gl_Position.
+
+basicShader.vs
+
+```
+    #version 120
+
+    attribute vec3 position;
+    attribute vec2 texCoord;
+
+    varying vec2 texCoord0;
+
+>>> uniform mat4 transform;
+
+    void main()
+    {
+>>>     gl_Position = transform * vec4(position, 1.0); // last param affects xlation
+        texCoord0 = texCoord;
+    }
+
+```
+
+Now the stone dorito flies around the screen and scales as well.
+
+![alt tag](img/tutorial-5-left.png) ![alt tag](img/tutorial-5-center.png) ![alt tag](img/tutorial-5-right.png)
