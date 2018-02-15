@@ -164,3 +164,19 @@ Went ahead and cleaned up a programmatic model of a cone based upon triangle fan
 ![alt tag](img/cone-topview.png)
 
 This is a view from the top, so it appears as a circle in two dimensions.
+
+# All you stone doritos are belong to us
+
+Worked through thebennybox's [Tutorial 4 OpenGL Textures](https://www.youtube.com/watch?v=17axYo6mKhY&list=PLEETnX-uPtBXT9T-hD0Bj31DSnwio-ywh&index=9).
+
+This required pulling in another 3rd party dependency, stb_image, for loading in the texture image itself.  In theory, I think SDL2 could do this, but for now I'm just on for the ride.
+
+At some point in the progression, I get this:
+
+![alt tag](img/tutorial-4-broken.png)
+
+but make the mistake of *not* committing my interesting code and end up diverging to *no* triangle showing up on the screen. :-/
+
+Eventually, I opt for grabbing a youtube commenter's reworked mesh.h/mesh.cpp which seems a bit more canonical anyway and, bam!, I get:
+
+![alt tag](img/tutorial-4-texture.png

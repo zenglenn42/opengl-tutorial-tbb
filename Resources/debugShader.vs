@@ -9,8 +9,6 @@ void main(void) {
     // with sane rendering through your debug shader.
 
     gl_Position = ftransform();
-
-    
     
     // Allow glColor*() calls to drive inputs to the vs/fs pathway.
     gl_FrontColor = gl_Color;

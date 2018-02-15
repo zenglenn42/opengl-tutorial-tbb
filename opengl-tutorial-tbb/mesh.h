@@ -7,45 +7,23 @@
 #define MESH_H
 
 #include <glm/glm.hpp>
-
-// Strictly speaking we should only need OpenGL/gl.h here, however
-// this tutorial employs the same header for consumer and implementer
-// code.  The private implementation, mesh.cpp, needs glew.h for
-// glGenVertexArrays & glBindVertexArray.
-
 #include <GL/glew.h>
 
-class Vertex
+struct Vertex
 {
-public:
-    Vertex(const glm::vec3& pos) {
-        this->pos = pos;
-    }
-    
-    glm::vec3* GetPos() { return &pos; }
-    
-private:
-    glm::vec3 pos;
+    glm::vec3 position;
+    glm::vec2 texCoord;
 };
 
 class Mesh
 {
 public:
-    Mesh(Vertex vertices[], unsigned int numVertices);
-    
+    Mesh(Vertex * verts, unsigned int numVerts);
     void Draw();
-    
-    virtual ~Mesh();
+    ~Mesh();
 private:
-    Mesh(const Mesh& other);
-    void operator=(const Mesh& other);
-    static const unsigned int NUM_BUFFERS = 1;
-    enum {
-        POSITION_VB,
-    };
-    
     GLuint m_vertexArrayObject;
-    GLuint m_vertexArrayBuffers[NUM_BUFFERS];
+    GLuint m_vertexArrayBuffer;
     unsigned int m_drawCount;
 };
 

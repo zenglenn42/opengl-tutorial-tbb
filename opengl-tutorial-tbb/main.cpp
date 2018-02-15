@@ -16,49 +16,30 @@
 #include "display.h"
 #include "shader.h"
 #include "mesh.h"
+#include "texture.h"
 #include "gldebug.h"
 
 int main(int argc, char** argv)
 {
     Display display(800, 600, "Hello World!");
     
-    Vertex vertices[] =
-    {
-        // NB: Vertices specified in counter-clockwise order are
-        //     interpreted as front-facing by convention.
-        //
-        // This is important to know if your code culls back-facing vertices
-        // and you mistakenly specify them in clockwise order ...
-        // and now are wondering why your rendering window is blank. :-/
-
-        Vertex(glm::vec3(-0.5, -0.5, 0.0)),
-        Vertex(glm::vec3( 0.5, -0.5, 0.0)),
-        Vertex(glm::vec3( 0.0,  0.5, 0.0))
+    Vertex vertices[] = {
+        glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec2(0.0f, 0.0f),
+        glm::vec3( 0.0f,  0.5f, 0.0f), glm::vec2(0.5f, 1.0f),
+        glm::vec3( 0.5f, -0.5f, 0.0f), glm::vec2(1.0f, 0.0f)
     };
     
     Mesh mesh(vertices, sizeof(vertices)/sizeof(vertices[0]));
     
-#ifdef GLDEBUG
-    Shader shader("Resources/debugShader");
-#else
     Shader shader("Resources/basicShader");
-#endif
+    Texture texture("Resources/bricks.jpg");
+    shader.Bind();
+    texture.Bind(0);
     
     while (!display.IsClosed())
     {
         display.Clear(0.2f, 0.3f, 0.8f, 1.0f);
-        shader.Bind();
-#ifdef GLDEBUG
-        // Drive your shaders with legacy-specified mesh.
-        glBegin(GL_TRIANGLES);
-        glColor3f(0.0f, 1.0f, 0.0f);
-        glVertex3f(-0.5f, -0.5f, 0.0f);
-        glVertex3f(0.5, -0.5, 0.0);
-        glVertex3f(0.0f, 0.5f, 0.0f);
-        glEnd();
-#else
         mesh.Draw();
-#endif
         display.Update();
     }
     return 0;

@@ -10,6 +10,8 @@
 		0C2961602031E383009A1145 /* debugShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C29615E2031DDF6009A1145 /* debugShader.fs */; };
 		0C2961612031E383009A1145 /* debugShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C29615F2031DDF6009A1145 /* debugShader.vs */; };
 		0C40A8C72030B3CA00314A71 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C40A8C62030B3CA00314A71 /* shader.cpp */; };
+		0C703CDD2034D2A600FFBF49 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C703CDC2034D2A600FFBF49 /* texture.cpp */; };
+		0C703CE02034E20A00FFBF49 /* bricks.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C703CDF2034E1EF00FFBF49 /* bricks.jpg */; };
 		0C93A7D0203018CE00FCCDDD /* display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C93A7CF203018CE00FCCDDD /* display.cpp */; };
 		0C93A7D320301AC000FCCDDD /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7D220301AC000FCCDDD /* OpenGL.framework */; };
 		0C93A7D520301C3D00FCCDDD /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7D420301C3D00FCCDDD /* libGLEW.a */; };
@@ -37,6 +39,7 @@
 			dstPath = Resources;
 			dstSubfolderSpec = 6;
 			files = (
+				0C703CE02034E20A00FFBF49 /* bricks.jpg in CopyFiles */,
 				0C2961602031E383009A1145 /* debugShader.fs in CopyFiles */,
 				0C2961612031E383009A1145 /* debugShader.vs in CopyFiles */,
 				0CAFDBC92030C3700074AB4E /* basicShader.fs in CopyFiles */,
@@ -51,6 +54,9 @@
 		0C29615F2031DDF6009A1145 /* debugShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = debugShader.vs; sourceTree = "<group>"; };
 		0C40A8C62030B3CA00314A71 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
 		0C40A8C82030B4F000314A71 /* shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
+		0C703CDC2034D2A600FFBF49 /* texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
+		0C703CDE2034D36000FFBF49 /* texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
+		0C703CDF2034E1EF00FFBF49 /* bricks.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bricks.jpg; sourceTree = "<group>"; };
 		0C781B4F20300BB90000131F /* opengl-tutorial-tbb */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "opengl-tutorial-tbb"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C93A7CE203018CE00FCCDDD /* display.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = display.h; sourceTree = "<group>"; };
 		0C93A7CF203018CE00FCCDDD /* display.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = display.cpp; sourceTree = "<group>"; };
@@ -119,17 +125,19 @@
 		0C781B5120300BB90000131F /* opengl-tutorial-tbb */ = {
 			isa = PBXGroup;
 			children = (
-				0C9F96A52034905100386F8D /* cone.cpp */,
-				0C9F96A72034905900386F8D /* cone.h */,
 				0CA5477A203088790065F0BE /* main.cpp */,
 				0C93A7CE203018CE00FCCDDD /* display.h */,
 				0C93A7CF203018CE00FCCDDD /* display.cpp */,
-				0C40A8C62030B3CA00314A71 /* shader.cpp */,
 				0C40A8C82030B4F000314A71 /* shader.h */,
-				0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */,
+				0C40A8C62030B3CA00314A71 /* shader.cpp */,
+				0C703CDE2034D36000FFBF49 /* texture.h */,
+				0C703CDC2034D2A600FFBF49 /* texture.cpp */,
 				0CAFDBCC2030CA1E0074AB4E /* mesh.h */,
-				0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */,
+				0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */,
 				0CF6FBD8203122EF00CC0E13 /* gldebug.h */,
+				0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */,
+				0C9F96A72034905900386F8D /* cone.h */,
+				0C9F96A52034905100386F8D /* cone.cpp */,
 			);
 			path = "opengl-tutorial-tbb";
 			sourceTree = "<group>";
@@ -155,6 +163,7 @@
 		0CAFDBC52030C0DE0074AB4E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0C703CDF2034E1EF00FFBF49 /* bricks.jpg */,
 				0C29615E2031DDF6009A1145 /* debugShader.fs */,
 				0C29615F2031DDF6009A1145 /* debugShader.vs */,
 				0CAFDBC62030C17A0074AB4E /* basicShader.vs */,
@@ -224,6 +233,7 @@
 				0C93A7D0203018CE00FCCDDD /* display.cpp in Sources */,
 				0C9F96A62034905100386F8D /* cone.cpp in Sources */,
 				0CAFDBCB2030C9EC0074AB4E /* mesh.cpp in Sources */,
+				0C703CDD2034D2A600FFBF49 /* texture.cpp in Sources */,
 				0CA5477B203088790065F0BE /* main.cpp in Sources */,
 				0CF6FBD7203121FB00CC0E13 /* gldebug.cpp in Sources */,
 			);

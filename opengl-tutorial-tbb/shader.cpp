@@ -19,6 +19,9 @@ Shader::Shader(const std::string& fileName)
         GLCall(glAttachShader(m_program, m_shaders[i]));
     }
     
+    GLCall(glBindAttribLocation(m_program, 0, "position"));
+    GLCall(glBindAttribLocation(m_program, 1, "texCoord"));
+    
     glLinkProgram(m_program);
     CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");
     
@@ -38,7 +41,7 @@ Shader::~Shader()
 
 void Shader::Bind()
 {
-    glUseProgram(m_program);
+    GLCall(glUseProgram(m_program));
 }
 
 GLuint Shader::CreateShader(const std::string& text, unsigned int type)
