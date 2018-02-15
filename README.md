@@ -181,3 +181,6 @@ Eventually, I opt for grabbing a youtube commenter's reworked mesh.h/mesh.cpp wh
 
 ![alt tag](img/tutorial-4-texture.png)
 
+I'm liking this menagerie of opengl code ... debugged (at least for one platform :-) and arrayed upon my github shelf.
+
+![alt tag](img/glass-menagerie.png)
