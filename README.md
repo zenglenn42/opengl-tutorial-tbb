@@ -190,7 +190,7 @@ I'm liking this [menagerie](http://theactingcompany.org/plays/2017-18-season/the
 
 # Texture Tutorial Reprise
 
-It bugged me that I couldn't get the live tutorial code working, so I rewatched the video and managed to fixed that.  I've still got the alternate implementation checked in.  It's just a conditional compile away by commenting out this macro in main.cpp:
+It bugs me that I can't get the live tutorial code working, so I rewatch the video and fix that.  I've still got the alternate implementation checked in.  It's just a conditional compile away by commenting out this macro in main.cpp:
 
 ```
 #define TUTORIAL_IMPLEMENTATION
