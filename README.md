@@ -175,7 +175,7 @@ At some point in the progression, I get this:
 
 ![alt tag](img/tutorial-4-broken.png)
 
-but make the mistake of *not* committing my interesting code and end up diverging to *no* triangle showing up on the screen. :-/
+but make the mistake of *not* committing my interesting code and end up diverging to *no* triangle showing up on the screen.  :-/
 
 Eventually, I opt for grabbing a youtube commenter's reworked mesh.h/mesh.cpp which seems a bit more canonical anyway and, bam!, I get:
 
