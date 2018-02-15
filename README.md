@@ -16,7 +16,7 @@ I've included some Xcode project files in my repo, but they assume the following
 	../dependencies/include
 	../dependencies/lib
 
-To accomplish this, I downloaded the following src zip files:
+To accomplish this, I download the following src zip files:
 
 	* SDL2-2.0.7.zip  http://www.libsdl.org/release/SDL2-2.0.7.zip
 	* glew-2.1.0.zip  https://sourceforge.net/projects/glew/files/glew/2.1.0/glew-2.1.0.zip/download
@@ -24,11 +24,11 @@ To accomplish this, I downloaded the following src zip files:
 	* debugbreak-7ee9b29.zip https://github.com/scottt/debugbreak
 	* stb-36afb9c.zip https://github.com/nothings/stb
 
-and staged them under:
+and stag them under:
 
 	../dependencies-srczip
 
-then built and installed them to ../dependencies with:
+then build and install them to ../opengl-tutorial-tbb-dependencies with:
 
 	make
 	make install
