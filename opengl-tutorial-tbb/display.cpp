@@ -74,6 +74,11 @@ void Display::Clear(float r, float g, float b, float a)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+void Display::Clear(const glm::vec4& color) {
+    glClearColor(color.r, color.g, color.b, color.a);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 void Display::SwapBuffers()
 {
     SDL_GL_SwapWindow(m_window);

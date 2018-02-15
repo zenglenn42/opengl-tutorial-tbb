@@ -8,6 +8,7 @@
 
 #include <string>
 #include <SDL2/SDL.h>
+#include <glm/glm.hpp>
 
 class Display
 {
@@ -16,6 +17,7 @@ public:
     void Update();
     bool IsClosed();
     void Clear(float r, float g, float b, float a);
+    void Clear(const glm::vec4 &color);
     void SwapBuffers();
     
     virtual ~Display();

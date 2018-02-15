@@ -29,6 +29,8 @@
 		0CAFDBC82030C36A0074AB4E /* basicShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC62030C17A0074AB4E /* basicShader.vs */; };
 		0CAFDBC92030C3700074AB4E /* basicShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC72030C1AB0074AB4E /* basicShader.fs */; };
 		0CAFDBCB2030C9EC0074AB4E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */; };
+		0CEC6F592035EAE6008BE2B8 /* altShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CEC6F582035EAA2008BE2B8 /* altShader.fs */; };
+		0CEC6F5A2035EAE6008BE2B8 /* altShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CEC6F572035EAA1008BE2B8 /* altShader.vs */; };
 		0CF6FBD7203121FB00CC0E13 /* gldebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 			dstPath = Resources;
 			dstSubfolderSpec = 6;
 			files = (
+				0CEC6F592035EAE6008BE2B8 /* altShader.fs in CopyFiles */,
+				0CEC6F5A2035EAE6008BE2B8 /* altShader.vs in CopyFiles */,
 				0C703CE02034E20A00FFBF49 /* bricks.jpg in CopyFiles */,
 				0C2961602031E383009A1145 /* debugShader.fs in CopyFiles */,
 				0C2961612031E383009A1145 /* debugShader.vs in CopyFiles */,
@@ -78,6 +82,8 @@
 		0CAFDBC72030C1AB0074AB4E /* basicShader.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = basicShader.fs; sourceTree = "<group>"; };
 		0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
 		0CAFDBCC2030CA1E0074AB4E /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
+		0CEC6F572035EAA1008BE2B8 /* altShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = altShader.vs; sourceTree = "<group>"; };
+		0CEC6F582035EAA2008BE2B8 /* altShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = altShader.fs; sourceTree = "<group>"; };
 		0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gldebug.cpp; sourceTree = "<group>"; };
 		0CF6FBD8203122EF00CC0E13 /* gldebug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gldebug.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +169,8 @@
 		0CAFDBC52030C0DE0074AB4E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0CEC6F582035EAA2008BE2B8 /* altShader.fs */,
+				0CEC6F572035EAA1008BE2B8 /* altShader.vs */,
 				0C703CDF2034E1EF00FFBF49 /* bricks.jpg */,
 				0C29615E2031DDF6009A1145 /* debugShader.fs */,
 				0C29615F2031DDF6009A1145 /* debugShader.vs */,

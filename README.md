@@ -153,6 +153,8 @@ Specifically, these threads
 
 [cross-platform-opengl-headers](https://stackoverflow.com/questions/3907818/opengl-headers-for-os-x-linux)
 
+[vao-vab-dance](https://www.opengl.org/discussion_boards/showthread.php/198202-Multiple-vba-s-single-buffer)
+
 seem nutrient dense for my purposes.  Hmmm, that looks like a bit of work. Not sure if I'm ready for all that kodified-kale just yet, but that's in the back of my mind as I reach for the Téo Gelato and press play on the next tutorial.
 
 Huh, maybe I can use [gluCylinder](http://pyopengl.sourceforge.net/documentation/manual-3.0/gluCylinder.html) with top radius = 0 to make my cone. (Dang, doesn't look like GLU is available on mobile since it is not implemented with OpenGL ES.)
@@ -184,3 +186,20 @@ Eventually, I opt for grabbing a youtube commenter's reworked mesh.h/mesh.cpp wh
 I'm liking this [menagerie](http://theactingcompany.org/plays/2017-18-season/the-glass-menagerie-1996-97) of opengl code ... debugged (at least for one platform :-) and arrayed upon my github shelf.
 
 ![alt tag](img/glass-menagerie.png)
+
+# Texture Tutorial Reprise
+
+It bugged me that I couldn't get the live tutorial code working, so I rewatched the video and got things working.  I've still got the alternate implementation checked in, but switched off with this macro in main.cpp:
+
+```
+#define TUTORIAL_IMPLEMENTATION
+...
+int main()
+{
+  ...
+}
+```
+
+The main difference is the tutorial video employs multiple data buffers segregated by attribute (i.e., position versus texture coordinate).
+
+The alternate implementation (courtesy Donovan Green) uses a single data buffer described to the shaders with slightly fancier vertex attribute pointers.
