@@ -180,3 +180,4 @@ but make the mistake of *not* committing my interesting code and end up divergin
 Eventually, I opt for grabbing a youtube commenter's reworked mesh.h/mesh.cpp which seems a bit more canonical anyway and, bam!, I get:
 
 ![alt tag](img/tutorial-4-texture.png)
+
