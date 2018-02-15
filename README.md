@@ -206,7 +206,7 @@ The alternate implementation (courtesy Donovan Green) uses a single data buffer 
 
 # [Model Transform Tutorial](https://youtu.be/Xe7FmplKAF0)
 
-Okay, so now we have a nice [class](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/opengl-tutorial-tbb/transform.h#L12) for translating, rotating, and scaling our models by leveraging a [transform uniform variable](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/opengl-tutorial-tbb/shader.cpp#L31) in our vertex shader.  The uniform is updated on the CPU side between draw invocations and is picked up by the vertex shader where it mutates gl_Position:
+Okay, so now we have a nice [class](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/opengl-tutorial-tbb/transform.h#L12) for translating, rotating, and scaling our models by leveraging a [transform uniform variable](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/opengl-tutorial-tbb/shader.cpp#L31) in our vertex shader.  The uniform is updated on the CPU side between [draw invocations](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/opengl-tutorial-tbb/main.cpp#L65) and is picked up by the vertex shader where it mutates gl_Position:
 
 basicShader.vs
 
