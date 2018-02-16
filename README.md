@@ -235,7 +235,7 @@ Now the stone dorito flies around the screen and scales as well.
 
 ![alt tag](img/tutorial-5-left.png) ![alt tag](img/tutorial-5-center.png) ![alt tag](img/tutorial-5-right.png)
 
-# Tutorial 6 Cameran and Perspective Transforms
+# [Tutorial 6](https://youtu.be/e3sc72ZDDpo) Camera and Perspective Transforms
 
 With this lession we get a camera transform that allows us to view our flying dorito in perspective.
 
