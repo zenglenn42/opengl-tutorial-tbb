@@ -48,9 +48,11 @@ Cutting to the chase, I discover two issues:
 	* mesh.cpp Mesh::Mesh constructor fails in glGenVertexArrays() with EXC_BAD_ACCESS
 	* main.cpp main() vertices specified in clockwise order were getting culled by uplevel display.cpp from github.
 
-I fix the first issue in display.cpp by enabling glewExperimental:
+I fix the first issue in display.cpp:
 
 ![alt tag](img/tutorial-3.5-rtbreak.png)
+
+by enabling glewExperimental:
 
 ```
 display.cpp
