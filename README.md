@@ -170,9 +170,9 @@ This is a view from the top, so it appears as a circle in two dimensions.
 
 # All your stoned doritos are belong to us!
 
-Worked through thebennybox's [Tutorial 4 OpenGL Textures](https://www.youtube.com/watch?v=17axYo6mKhY&list=PLEETnX-uPtBXT9T-hD0Bj31DSnwio-ywh&index=9).
+Work through thebennybox's [Tutorial 4 OpenGL Textures](https://www.youtube.com/watch?v=17axYo6mKhY&list=PLEETnX-uPtBXT9T-hD0Bj31DSnwio-ywh&index=9).
 
-This required pulling in another 3rd party dependency, [stb_image](https://github.com/nothings/stb), for loading in the texture image itself.  In theory, I think SDL2 could do this, but for now I'm just along for the ride.
+This requires pulling in another 3rd party dependency, [stb_image](https://github.com/nothings/stb), for loading in the texture image itself.  In theory, I think SDL2 could do this, but for now I'm just along for the ride.
 
 At some point in the progression, I get this:
 
