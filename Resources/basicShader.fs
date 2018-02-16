@@ -7,7 +7,8 @@ uniform sampler2D diffuse;
 
 void main()
 {
-    // gl_FragColor = texture2D(diffuse, vec2(0.3, 0.8));
-    gl_FragColor = texture2D(diffuse, texCoord0)
-        * clamp(dot(-vec3(0, 0, 1), normal0), 0.0, 1.0);
+    vec3 lightDirection = vec3(0.0, 0.0, 1.0); // coming on z-axis
+    float lambertianLighting = clamp(dot(-lightDirection, normal0), 0.0, 1.0);
+
+    gl_FragColor = texture2D(diffuse, texCoord0) * lambertianLighting;
 }

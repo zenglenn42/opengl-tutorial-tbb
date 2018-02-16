@@ -15,6 +15,7 @@ void main()
     
     gl_Position = transform * vec4(position, 1.0); // last param affects xlation
     texCoord0 = texCoord;
-    normal0 = (transform * vec4(normal, 0.0)).xyz;
     
+    vec4 normalTransform = transform * vec4(normal, 0.0); // 0.0 means light is invariant of translation
+    normal0 = (normalTransform).xyz;
 }
