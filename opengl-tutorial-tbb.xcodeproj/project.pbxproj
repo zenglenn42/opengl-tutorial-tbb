@@ -25,6 +25,7 @@
 		0C93A7E52030222700FCCDDD /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7E42030222700FCCDDD /* libiconv.tbd */; };
 		0C93A7E72030227F00FCCDDD /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7E62030227F00FCCDDD /* Carbon.framework */; };
 		0C9F96A62034905100386F8D /* cone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C9F96A52034905100386F8D /* cone.cpp */; };
+		0CA4D1AB2036A4F100873414 /* doritos.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CA4D1AA2036A4DA00873414 /* doritos.jpg */; };
 		0CA5477B203088790065F0BE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA5477A203088790065F0BE /* main.cpp */; };
 		0CAFDBC82030C36A0074AB4E /* basicShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC62030C17A0074AB4E /* basicShader.vs */; };
 		0CAFDBC92030C3700074AB4E /* basicShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC72030C1AB0074AB4E /* basicShader.fs */; };
@@ -41,6 +42,7 @@
 			dstPath = Resources;
 			dstSubfolderSpec = 6;
 			files = (
+				0CA4D1AB2036A4F100873414 /* doritos.jpg in CopyFiles */,
 				0CEC6F592035EAE6008BE2B8 /* altShader.fs in CopyFiles */,
 				0CEC6F5A2035EAE6008BE2B8 /* altShader.vs in CopyFiles */,
 				0C703CE02034E20A00FFBF49 /* bricks.jpg in CopyFiles */,
@@ -78,6 +80,7 @@
 		0C9F96A52034905100386F8D /* cone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cone.cpp; sourceTree = "<group>"; };
 		0C9F96A72034905900386F8D /* cone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cone.h; sourceTree = "<group>"; };
 		0CA4D1A920369A4D00873414 /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
+		0CA4D1AA2036A4DA00873414 /* doritos.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = doritos.jpg; sourceTree = "<group>"; };
 		0CA5477A203088790065F0BE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0CAFDBC62030C17A0074AB4E /* basicShader.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = basicShader.vs; sourceTree = "<group>"; };
 		0CAFDBC72030C1AB0074AB4E /* basicShader.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = basicShader.fs; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 		0CAFDBC52030C0DE0074AB4E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0CA4D1AA2036A4DA00873414 /* doritos.jpg */,
 				0CEC6F582035EAA2008BE2B8 /* altShader.fs */,
 				0CEC6F572035EAA1008BE2B8 /* altShader.vs */,
 				0C703CDF2034E1EF00FFBF49 /* bricks.jpg */,

@@ -50,7 +50,7 @@ int main(int argc, char** argv)
     Shader shader("Resources/altShader");
     const glm::vec4 backgroundColor = Green;
 #endif
-    Texture texture("Resources/bricks.jpg");
+    Texture texture("Resources/doritos.jpg");
     Camera camera(glm::vec3(0.0f, 0.0f, -3.0f),
                   70.0f,
                   (float)WIDTH /(float)HEIGHT,
