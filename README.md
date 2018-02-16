@@ -24,7 +24,7 @@ To accomplish this, I download the following src zip files:
 	* debugbreak-7ee9b29.zip https://github.com/scottt/debugbreak
 	* stb-36afb9c.zip https://github.com/nothings/stb
 
-and stag them under:
+and stage them under:
 
 	../dependencies-srczip
 
