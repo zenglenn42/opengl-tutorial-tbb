@@ -8,12 +8,6 @@
 // Then uncomment this macro.
 //#define GLDEBUG
 
-// Want to use theBennyBox's implementation as given in Tutorial 4 on youtube?
-//
-// Then keep this macro defined.  Otherwise an alternate version of the Mesh
-// class is built with a single vector array buffer (vab), managed by slightly
-// fancier calls to glVertexAttribPointer().
-
 #include <iostream>
 #include <glm/glm.hpp>
 #include "display.h"
@@ -45,13 +39,8 @@ int main(int argc, char** argv)
     Mesh mesh(vertices, sizeof(vertices)/sizeof(vertices[0]), indices, sizeof(indices)/sizeof(indices[0]));
     Mesh mesh2("./Resources/monkey3.obj");
     
-#if defined(TUTORIAL_IMPLEMENTATION)
     Shader shader("Resources/basicShader");
     const glm::vec4 backgroundColor = Blue;
-#else
-    Shader shader("Resources/altShader");
-    const glm::vec4 backgroundColor = Green;
-#endif
     Texture texture("Resources/bricks.jpg");
     Camera camera(glm::vec3(0.0f, 0.0f, -4.0f),
                   70.0f,
