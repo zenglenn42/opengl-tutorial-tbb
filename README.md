@@ -237,6 +237,6 @@ Now the stone dorito flies around the screen and scales as well.
 
 # [Tutorial 6](https://youtu.be/e3sc72ZDDpo) Camera and Perspective Transforms
 
-With this lession we get a camera transform that allows us to view our flying dorito in perspective.
+With this lession we get a [camera transform](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/opengl-tutorial-tbb/camera.h) that allows us to view our flying dorito in perspective.
 
 ![alt tag](img/tutorial-6-camera.png)
