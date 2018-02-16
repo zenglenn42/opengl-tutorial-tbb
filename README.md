@@ -240,3 +240,9 @@ Now the stone dorito flies around the screen and scales as well.
 With this lession we get a [camera transform](https://github.com/zenglenn42/opengl-tutorial-tbb/blob/master/opengl-tutorial-tbb/camera.h) that allows us to view our flying dorito in perspective.
 
 ![alt tag](img/tutorial-6-camera.png)
+
+# [Tutorial 7](https://youtu.be/NS980twY1ZE)
+
+We wrap up with a more complicated monkey mesh exported from Blender and lit using [Lambertian lighting](https://en.wikipedia.org/wiki/Lambertian_reflectance).
+
+![alt tag](img/tutorial-7-lambertianmonkey.png)

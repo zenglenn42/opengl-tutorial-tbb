@@ -21,6 +21,7 @@ Shader::Shader(const std::string& fileName)
     
     GLCall(glBindAttribLocation(m_program, 0, "position"));
     GLCall(glBindAttribLocation(m_program, 1, "texCoord"));
+    GLCall(glBindAttribLocation(m_program, 2, "normal"));
     
     glLinkProgram(m_program);
     CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");

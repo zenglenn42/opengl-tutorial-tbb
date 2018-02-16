@@ -30,6 +30,8 @@
 		0CAFDBC82030C36A0074AB4E /* basicShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC62030C17A0074AB4E /* basicShader.vs */; };
 		0CAFDBC92030C3700074AB4E /* basicShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CAFDBC72030C1AB0074AB4E /* basicShader.fs */; };
 		0CAFDBCB2030C9EC0074AB4E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */; };
+		0CC6162620370C1C007DD4C5 /* obj_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CC6162520370C1C007DD4C5 /* obj_loader.cpp */; };
+		0CC6162B203713A1007DD4C5 /* monkey3.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CC6162A20371379007DD4C5 /* monkey3.obj */; };
 		0CEC6F592035EAE6008BE2B8 /* altShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CEC6F582035EAA2008BE2B8 /* altShader.fs */; };
 		0CEC6F5A2035EAE6008BE2B8 /* altShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CEC6F572035EAA1008BE2B8 /* altShader.vs */; };
 		0CF6FBD7203121FB00CC0E13 /* gldebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */; };
@@ -42,6 +44,7 @@
 			dstPath = Resources;
 			dstSubfolderSpec = 6;
 			files = (
+				0CC6162B203713A1007DD4C5 /* monkey3.obj in CopyFiles */,
 				0CA4D1AB2036A4F100873414 /* doritos.jpg in CopyFiles */,
 				0CEC6F592035EAE6008BE2B8 /* altShader.fs in CopyFiles */,
 				0CEC6F5A2035EAE6008BE2B8 /* altShader.vs in CopyFiles */,
@@ -86,6 +89,9 @@
 		0CAFDBC72030C1AB0074AB4E /* basicShader.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = basicShader.fs; sourceTree = "<group>"; };
 		0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
 		0CAFDBCC2030CA1E0074AB4E /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
+		0CC6162520370C1C007DD4C5 /* obj_loader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = obj_loader.cpp; sourceTree = "<group>"; };
+		0CC6162720370C3B007DD4C5 /* obj_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = obj_loader.h; sourceTree = "<group>"; };
+		0CC6162A20371379007DD4C5 /* monkey3.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monkey3.obj; sourceTree = "<group>"; };
 		0CDC37932036174400F421A7 /* transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transform.h; sourceTree = "<group>"; };
 		0CEC6F572035EAA1008BE2B8 /* altShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = altShader.vs; sourceTree = "<group>"; };
 		0CEC6F582035EAA2008BE2B8 /* altShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = altShader.fs; sourceTree = "<group>"; };
@@ -138,19 +144,21 @@
 			children = (
 				0CA5477A203088790065F0BE /* main.cpp */,
 				0C93A7CE203018CE00FCCDDD /* display.h */,
-				0CA4D1A920369A4D00873414 /* camera.h */,
 				0C93A7CF203018CE00FCCDDD /* display.cpp */,
+				0CA4D1A920369A4D00873414 /* camera.h */,
 				0C40A8C82030B4F000314A71 /* shader.h */,
 				0C40A8C62030B3CA00314A71 /* shader.cpp */,
 				0C703CDE2034D36000FFBF49 /* texture.h */,
 				0C703CDC2034D2A600FFBF49 /* texture.cpp */,
 				0CAFDBCC2030CA1E0074AB4E /* mesh.h */,
-				0CDC37932036174400F421A7 /* transform.h */,
 				0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */,
+				0CDC37932036174400F421A7 /* transform.h */,
 				0CF6FBD8203122EF00CC0E13 /* gldebug.h */,
 				0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */,
 				0C9F96A72034905900386F8D /* cone.h */,
 				0C9F96A52034905100386F8D /* cone.cpp */,
+				0CC6162520370C1C007DD4C5 /* obj_loader.cpp */,
+				0CC6162720370C3B007DD4C5 /* obj_loader.h */,
 			);
 			path = "opengl-tutorial-tbb";
 			sourceTree = "<group>";
@@ -176,6 +184,7 @@
 		0CAFDBC52030C0DE0074AB4E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0CC6162A20371379007DD4C5 /* monkey3.obj */,
 				0CA4D1AA2036A4DA00873414 /* doritos.jpg */,
 				0CEC6F582035EAA2008BE2B8 /* altShader.fs */,
 				0CEC6F572035EAA1008BE2B8 /* altShader.vs */,
@@ -245,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CC6162620370C1C007DD4C5 /* obj_loader.cpp in Sources */,
 				0C40A8C72030B3CA00314A71 /* shader.cpp in Sources */,
 				0C93A7D0203018CE00FCCDDD /* display.cpp in Sources */,
 				0C9F96A62034905100386F8D /* cone.cpp in Sources */,

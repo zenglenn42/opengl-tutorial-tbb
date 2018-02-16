@@ -13,7 +13,6 @@
 // Then keep this macro defined.  Otherwise an alternate version of the Mesh
 // class is built with a single vector array buffer (vab), managed by slightly
 // fancier calls to glVertexAttribPointer().
-#define TUTORIAL_IMPLEMENTATION
 
 #include <iostream>
 #include <glm/glm.hpp>
@@ -41,7 +40,10 @@ int main(int argc, char** argv)
         Vertex(glm::vec3( 0.5f, -0.5f, 0.0f), glm::vec2(1.0f, 0.0f))
     };
     
-    Mesh mesh(vertices, sizeof(vertices)/sizeof(vertices[0]));
+    unsigned int indices[] = {0, 1, 2};
+    
+    Mesh mesh(vertices, sizeof(vertices)/sizeof(vertices[0]), indices, sizeof(indices)/sizeof(indices[0]));
+    Mesh mesh2("./Resources/monkey3.obj");
     
 #if defined(TUTORIAL_IMPLEMENTATION)
     Shader shader("Resources/basicShader");
@@ -50,8 +52,8 @@ int main(int argc, char** argv)
     Shader shader("Resources/altShader");
     const glm::vec4 backgroundColor = Green;
 #endif
-    Texture texture("Resources/doritos.jpg");
-    Camera camera(glm::vec3(0.0f, 0.0f, -3.0f),
+    Texture texture("Resources/bricks.jpg");
+    Camera camera(glm::vec3(0.0f, 0.0f, -4.0f),
                   70.0f,
                   (float)WIDTH /(float)HEIGHT,
                   0.01f,
@@ -75,7 +77,7 @@ int main(int argc, char** argv)
         shader.Bind();
         texture.Bind(0);
         shader.Update(transform, camera);
-        mesh.Draw();
+        mesh2.Draw();
         
         display.Update();
         counter += 0.01f;
