@@ -122,7 +122,22 @@ stb_IDIR    = $(stb_PREFIX)/include/stb
 stb_Headers = stb.h stb_image.h
 stb_Install = $(patsubst %, $(stb_IDIR)/%, $(stb_Headers))
 
-default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build) $(debugbreak_Build) $(stb_Build)
+#-----------------------
+# freetype-2.9.tar.gz
+#
+# https://download.savannah.gnu.org/releases/freetype/
+# Includes library for rendering fonts.
+# License: https://www.freetype.org/license.html FTL (BSD-style)
+#-----------------------
+ft_VERSION = 2.9
+ft_SRC_GZ = $(dep_ZIP_DIR)/freetype-$(ft_VERSION).tar.gz
+ft_SRC_DIR = $(dep_BUILD_DIR)/freetype-$(ft_VERSION)
+ft_PREFIX  = $(dep_INSTALL_DIR)
+ft_BLD_DIR = $(ft_SRC_DIR)/build
+ft_Build   = $(ft_BLD_DIR)/cmake_install.cmake
+ft_Install = $(ft_PREFIX)/include/freetype2/freetype/freetype.h
+
+default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build) $(debugbreak_Build) $(stb_Build) $(ft_Build)
 
 .PHONY: glew glm sdl2
 glew: $(dep_BUILD_DIR) $(glew_Build) $(dep_INSTALL_DIR) $(glew_Install)
@@ -130,6 +145,7 @@ glm: $(dep_BUILD_DIR) $(glm_Build) $(dep_INSTALL_DIR) $(glm_Install)
 sdl2: $(dep_BUILD_DIR) $(sdl2_Build) $(dep_INSTALL_DIR) $(sdl2_Install)
 debugbreak: $(dep_BUILD_DIR) $(debugbreak_Build) $(dep_INSTALL_DIR) $(debugbreak_Install)
 stb: $(dep_BUILD_DIR) $(stb_Build) $(dep_INSTALL_DIR) $(stb_Install)
+ft: $(dep_BUILD_DIR) $(ft_Build) $(dep_INSTALL_DIR) $(ft_Install)
 
 $(dep_BUILD_DIR) $(dep_INSTALL_DIR) $(debugbreak_IDIR) $(stb_IDIR):
 	mkdir -p $@
@@ -157,6 +173,11 @@ stb_Unpack = $(stb_SRC_DIR)/README.md
 $(stb_Unpack): $(stb_SRC_ZIP)
 	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(stb_SRC_ZIP)
 
+ft_Unpack = $(ft_SRC_DIR)/CMakeLists.txt
+untar_FLAGS = -zxvf
+$(ft_Unpack): $(ft_SRC_ZIP)
+	cd $(dep_BUILD_DIR) && tar $(untar_FLAGS) $(ft_SRC_GZ)
+
 $(glew_Build): $(glew_Unpack)
 	cd $(glew_SRC_DIR) && $(MAKE) GLEW_PREFIX=$(glew_PREFIX) GLEW_DEST=$(glew_DEST)
 
@@ -173,7 +194,11 @@ $(debugbreak_Build): $(debugbreak_Unpack)
 $(stb_Build): $(stb_Unpack)
 	@echo "Nothing to build for stb :-)"
 
-install: $(dep_INSTALL_DIR) $(glew_Install) $(glm_Install) $(sdl2_Install) $(debugbreak_Install) $(stb_Install)
+$(ft_Build): $(ft_Unpack)
+	mkdir -p $(ft_BLD_DIR) && cd $(ft_BLD_DIR) && $(CMAKE) -DCMAKE_INSTALL_PREFIX=$(ft_PREFIX) ..
+	cd $(ft_BLD_DIR) && $(MAKE)
+
+install: $(dep_INSTALL_DIR) $(glew_Install) $(glm_Install) $(sdl2_Install) $(debugbreak_Install) $(stb_Install) $(ft_Install)
 
 $(glew_Install):
 	cd $(glew_SRC_DIR) && $(MAKE) install GLEW_PREFIX=$(glew_PREFIX) GLEW_DEST=$(glew_DEST)
@@ -189,6 +214,9 @@ $(debugbreak_Install): | $(debugbreak_IDIR)
 
 $(stb_Install): | $(stb_IDIR)
 	cd $(stb_BLD_DIR) && cp $(@F) $@
+
+$(ft_Install):
+	cd $(ft_SRC_DIR)/build && $(MAKE) install
 
 .PHONY: clean
 clean:
