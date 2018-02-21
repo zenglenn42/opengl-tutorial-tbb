@@ -147,7 +147,6 @@ ft_Install = $(ft_PREFIX)/include/freetype2/freetype/freetype.h
 #
 # https://www.libsdl.org/projects/SDL_ttf/release
 # TrueType support for SDL2.
-# $ ./configure --with-freetype-prefix=$(ft_PREFIX) --with-sdl-prefix=$(sdl2_PREFIX) --prefix=$(sdl2tff_PREFIX) CPPFLAGS="-I$(ft_PREFIX)/include/freetype2" 
 #-----------------------
 sdl2ttf_VERSION = 2.0.14
 sdl2ttf_SRC_ZIP = $(dep_ZIP_DIR)/SDL2_ttf-$(sdl2ttf_VERSION).zip
@@ -157,7 +156,7 @@ sdl2ttf_BLD_DIR = $(sdl2ttf_SRC_DIR)/build
 sdl2ttf_Build   = $(sdl2ttf_BLD_DIR)/Makefile
 sdl2ttf_Install = $(sdl2ttf_PREFIX)/lib/libSDL2_ttf.a
 
-default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build) $(debugbreak_Build) $(stb_Build) $(ft_Build)
+default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build) $(debugbreak_Build) $(stb_Build) $(ft_Build) $(sdl2ttf_Build)
 
 .PHONY: glew glm sdl2 debugbreak stb ft sdl2ttf
 glew: $(dep_BUILD_DIR) $(glew_Build) $(dep_INSTALL_DIR) $(glew_Install)
