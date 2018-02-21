@@ -273,7 +273,7 @@ Roughly, I learn:
 
 I snag the freetype source archive off the web and notice it has a cmake build front-end.  But trying that doesn't seem to build / install freetype-config on macOS (10.13).  This is required by the upstream SDL2_ttf build, so time to dig in deeper.
 
-The official freetype build readme says the cmake offering is a community add-on, but the *supported* OS X build is the lower-level unix-style autotools build.  Doing that works.
+The official freetype build readme says the cmake offering is a community add-on, but the *supported* OS X build is the lower-level unix-style autotools build.  Doing that *works*.
 
 # Building SDL_ttf
 
@@ -317,10 +317,11 @@ Some brute force greps from root come up dry.  So I jump into Xcode IDE itself, 
 
 Project / Build Rules / Link Binary With Libraries
 
-and attempting to add("+") an addtional framework brings up a searchable list which includes:
+and attempt to add("+") an addtional framework brings up a searchable list which includes:
 
-macOS 10.13
-	CoreAudio.framework
+	macOS 10.13
+
+		CoreAudio.framework
 
 Not sure I *need to know*, but I'm curious where these frameworks actually live.  Adding a framework through the UI allows me to right-click and do a "Show In Finder" option, yielding:
 
@@ -328,9 +329,9 @@ Not sure I *need to know*, but I'm curious where these frameworks actually live.
 
 Dang, that's pretty involved.  
 
-But maybe I just wedge a "-framework Blah" into LDFLAGS at configure time and the tooling will *find* that framework?  [This](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/MachOTopics/1-Articles/building_files.html) has general macOS build-fu, by the way.
+But maybe I just wedge a "-framework Blah" into LDFLAGS at configure time and the tooling will *find* that framework?  ([This](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/MachOTopics/1-Articles/building_files.html) has general macOS build-fu, by the way.)
 
-To speed up the process, I iterate by invoking libtool directly from the command-line, naively just adding *-framework CoreAudio* for starters, but eventually settling upon adding this at the end of the libtool invocation: 
+To speed up the process, I iterate by invoking libtool directly from the command-line, naively just adding *-framework CoreAudio* for starters, but eventually settling upon this idiom at the end of the libtool invocation: 
 
 ```
 libtool ...  -Wl,-framework,CoreAudio
@@ -360,11 +361,11 @@ Undefined symbols for architecture x86_64:                      Undefined symbol
   "_AudioQueueDispose", referenced from:                          "_AudioQueueDispose", referenced from:
 ```
 
-So I think we're onto something. Just need to keep playing this game by adding additional frameworks:
+So I think we're onto something. Just keep playing this game by adding additional frameworks (plus the the iconv library):
 
 ```
 libtool ...
--Wl,-framework,CoreAudio,-framework,AudioToolbox,-framework,CoreFoundation,-framework,CoreGraphics,-framework,CoreVideo,-framework,ForceFeedback,-framework,IOKit,-framework,Carbon,-framework,AppKit -liconv
+-Wl,-framework,CoreAudio,-framework,AudioToolbox,-framework,CoreFoundation,-framework,CoreGraphics,-framework,CoreVideo,-framework,ForceFeedback,-framework,IOKit,-framework,Carbon,-framework,AppKit -liconv ...
 ```
 
 And now I get a sweet .libs directory in my build directory with the following:
