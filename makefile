@@ -134,12 +134,28 @@ ft_SRC_GZ = $(dep_ZIP_DIR)/freetype-$(ft_VERSION).tar.gz
 ft_SRC_DIR = $(dep_BUILD_DIR)/freetype-$(ft_VERSION)
 ft_PREFIX  = $(dep_INSTALL_DIR)
 ft_BLD_DIR = $(ft_SRC_DIR)/build
-ft_Build   = $(ft_BLD_DIR)/cmake_install.cmake
+ft_Build   = $(ft_BLD_DIR)/Makefile
+#ft_Build  = $(ft_BLD_DIR)/cmake_install.cmake
 ft_Install = $(ft_PREFIX)/include/freetype2/freetype/freetype.h
+
+#-----------------------
+# SDL2_ttf-2.0.14.zip
+#
+# https://www.libsdl.org/projects/SDL_ttf/release
+# TrueType support for SDL2.
+# $ ./configure --with-freetype-prefix=$(ft_PREFIX) --with-sdl-prefix=$(sdl2_PREFIX) --prefix=$(sdl2tff_PREFIX) CPPFLAGS="-I$(ft_PREFIX)/include/freetype2" 
+#-----------------------
+sdl2ttf_VERSION = 2.0.14
+sdl2ttf_SRC_GZ = $(dep_ZIP_DIR)/SDL2_ttf-$(sdl2ttf_VERSION).tar.gz
+sdl2ttf_SRC_DIR = $(dep_BUILD_DIR)/SDL2_ttf-$(ft_VERSION)
+sdl2ttf_PREFIX  = $(dep_INSTALL_DIR)
+sdl2ttf_BLD_DIR = $(sdl2ttf_SRC_DIR)
+sdl2ttf_Build   = $(sdl2ttf_BLD_DIR)/Makefile
+sdl2ttf_Install = $(sdl2ttf_PREFIX)/include
 
 default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build) $(debugbreak_Build) $(stb_Build) $(ft_Build)
 
-.PHONY: glew glm sdl2
+.PHONY: glew glm sdl2 debugbreak stb ft
 glew: $(dep_BUILD_DIR) $(glew_Build) $(dep_INSTALL_DIR) $(glew_Install)
 glm: $(dep_BUILD_DIR) $(glm_Build) $(dep_INSTALL_DIR) $(glm_Install)
 sdl2: $(dep_BUILD_DIR) $(sdl2_Build) $(dep_INSTALL_DIR) $(sdl2_Install)
@@ -173,9 +189,9 @@ stb_Unpack = $(stb_SRC_DIR)/README.md
 $(stb_Unpack): $(stb_SRC_ZIP)
 	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(stb_SRC_ZIP)
 
-ft_Unpack = $(ft_SRC_DIR)/CMakeLists.txt
+ft_Unpack = $(ft_SRC_DIR)/configure
 untar_FLAGS = -zxvf
-$(ft_Unpack): $(ft_SRC_ZIP)
+$(ft_Unpack): $(ft_SRC_GZ)
 	cd $(dep_BUILD_DIR) && tar $(untar_FLAGS) $(ft_SRC_GZ)
 
 $(glew_Build): $(glew_Unpack)
@@ -195,8 +211,21 @@ $(stb_Build): $(stb_Unpack)
 	@echo "Nothing to build for stb :-)"
 
 $(ft_Build): $(ft_Unpack)
-	mkdir -p $(ft_BLD_DIR) && cd $(ft_BLD_DIR) && $(CMAKE) -DCMAKE_INSTALL_PREFIX=$(ft_PREFIX) ..
+	mkdir -p $(ft_BLD_DIR) && cd $(ft_BLD_DIR) && $(ft_SRC_DIR)/configure --prefix=$(ft_PREFIX)
 	cd $(ft_BLD_DIR) && $(MAKE)
+
+# Community-contributed cmake build for freetype is not 
+# generating freetype-config for me on macOS.  This will 
+# create woes when we try to build other 3rd party-packages 
+# that depend upon this build-time file (like SDL2_ttf).
+#
+# So I'm using the supported 'unix-style' build as recommended 
+# in the documentation instead of the potentially more portable 
+# cmake build.
+#
+#$(ft_Build): $(ft_Unpack)
+#	mkdir -p $(ft_BLD_DIR) && cd $(ft_BLD_DIR) && $(CMAKE) -DCMAKE_INSTALL_PREFIX=$(ft_PREFIX) ..
+#	cd $(ft_BLD_DIR) && $(MAKE)
 
 install: $(dep_INSTALL_DIR) $(glew_Install) $(glm_Install) $(sdl2_Install) $(debugbreak_Install) $(stb_Install) $(ft_Install)
 

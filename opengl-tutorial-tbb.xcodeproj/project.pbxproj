@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C21F325203D111700383337 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C21F324203D111700383337 /* libfreetype.a */; };
 		0C2961602031E383009A1145 /* debugShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C29615E2031DDF6009A1145 /* debugShader.fs */; };
 		0C2961612031E383009A1145 /* debugShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C29615F2031DDF6009A1145 /* debugShader.vs */; };
 		0C40A8C72030B3CA00314A71 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C40A8C62030B3CA00314A71 /* shader.cpp */; };
@@ -59,6 +60,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C21F322203D0F9B00383337 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
+		0C21F324203D111700383337 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = "../opengl-tutorial-tbb-dependencies/lib/libfreetype.a"; sourceTree = "<group>"; };
 		0C29615E2031DDF6009A1145 /* debugShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = debugShader.fs; sourceTree = "<group>"; };
 		0C29615F2031DDF6009A1145 /* debugShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = debugShader.vs; sourceTree = "<group>"; };
 		0C40A8C62030B3CA00314A71 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 				0C93A7D320301AC000FCCDDD /* OpenGL.framework in Frameworks */,
 				0C93A7D720301C5200FCCDDD /* libSDL2.a in Frameworks */,
 				0C93A7D520301C3D00FCCDDD /* libGLEW.a in Frameworks */,
+				0C21F325203D111700383337 /* libfreetype.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +170,8 @@
 		0C93A7D120301ABF00FCCDDD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0C21F324203D111700383337 /* libfreetype.a */,
+				0C21F322203D0F9B00383337 /* SDL2_ttf.framework */,
 				0C93A7E62030227F00FCCDDD /* Carbon.framework */,
 				0C93A7E42030222700FCCDDD /* libiconv.tbd */,
 				0C93A7E22030200300FCCDDD /* IOKit.framework */,
@@ -375,6 +381,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
 				"HEADER_SEARCH_PATHS[arch=*]" = "../${PRODUCT_NAME}-dependencies/include";
 				LIBRARY_SEARCH_PATHS = (
@@ -392,6 +402,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				"HEADER_SEARCH_PATHS[arch=*]" = "../${PRODUCT_NAME}-dependencies/include";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
