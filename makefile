@@ -26,6 +26,10 @@
 #
 # which feels like a distant and exotic land.
 #
+# Plus, many of the required frameworks live under:
+#
+# /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks
+#
 # Tested on OSX 10.13
 #
 # Copyright (☯) 2018 Glenn Streiff
@@ -146,22 +150,23 @@ ft_Install = $(ft_PREFIX)/include/freetype2/freetype/freetype.h
 # $ ./configure --with-freetype-prefix=$(ft_PREFIX) --with-sdl-prefix=$(sdl2_PREFIX) --prefix=$(sdl2tff_PREFIX) CPPFLAGS="-I$(ft_PREFIX)/include/freetype2" 
 #-----------------------
 sdl2ttf_VERSION = 2.0.14
-sdl2ttf_SRC_GZ = $(dep_ZIP_DIR)/SDL2_ttf-$(sdl2ttf_VERSION).tar.gz
-sdl2ttf_SRC_DIR = $(dep_BUILD_DIR)/SDL2_ttf-$(ft_VERSION)
+sdl2ttf_SRC_ZIP = $(dep_ZIP_DIR)/SDL2_ttf-$(sdl2ttf_VERSION).zip
+sdl2ttf_SRC_DIR = $(dep_BUILD_DIR)/SDL2_ttf-$(sdl2ttf_VERSION)
 sdl2ttf_PREFIX  = $(dep_INSTALL_DIR)
-sdl2ttf_BLD_DIR = $(sdl2ttf_SRC_DIR)
+sdl2ttf_BLD_DIR = $(sdl2ttf_SRC_DIR)/build
 sdl2ttf_Build   = $(sdl2ttf_BLD_DIR)/Makefile
-sdl2ttf_Install = $(sdl2ttf_PREFIX)/include
+sdl2ttf_Install = $(sdl2ttf_PREFIX)/lib/libSDL2_ttf.a
 
 default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build) $(debugbreak_Build) $(stb_Build) $(ft_Build)
 
-.PHONY: glew glm sdl2 debugbreak stb ft
+.PHONY: glew glm sdl2 debugbreak stb ft sdl2ttf
 glew: $(dep_BUILD_DIR) $(glew_Build) $(dep_INSTALL_DIR) $(glew_Install)
 glm: $(dep_BUILD_DIR) $(glm_Build) $(dep_INSTALL_DIR) $(glm_Install)
 sdl2: $(dep_BUILD_DIR) $(sdl2_Build) $(dep_INSTALL_DIR) $(sdl2_Install)
 debugbreak: $(dep_BUILD_DIR) $(debugbreak_Build) $(dep_INSTALL_DIR) $(debugbreak_Install)
 stb: $(dep_BUILD_DIR) $(stb_Build) $(dep_INSTALL_DIR) $(stb_Install)
 ft: $(dep_BUILD_DIR) $(ft_Build) $(dep_INSTALL_DIR) $(ft_Install)
+sdl2ttf: $(dep_BUILD_DIR) $(sdl2ttf_Build) $(dep_INSTALL_DIR) $(sdl2ttf_Install)
 
 $(dep_BUILD_DIR) $(dep_INSTALL_DIR) $(debugbreak_IDIR) $(stb_IDIR):
 	mkdir -p $@
@@ -193,6 +198,10 @@ ft_Unpack = $(ft_SRC_DIR)/configure
 untar_FLAGS = -zxvf
 $(ft_Unpack): $(ft_SRC_GZ)
 	cd $(dep_BUILD_DIR) && tar $(untar_FLAGS) $(ft_SRC_GZ)
+
+sdl2ttf_Unpack = $(sdl2ttf_SRC_DIR)/configure
+$(sdl2ttf_Unpack): $(sdl2ttf_SRC_ZIP)
+	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(sdl2ttf_SRC_ZIP)
 
 $(glew_Build): $(glew_Unpack)
 	cd $(glew_SRC_DIR) && $(MAKE) GLEW_PREFIX=$(glew_PREFIX) GLEW_DEST=$(glew_DEST)
@@ -227,6 +236,10 @@ $(ft_Build): $(ft_Unpack)
 #	mkdir -p $(ft_BLD_DIR) && cd $(ft_BLD_DIR) && $(CMAKE) -DCMAKE_INSTALL_PREFIX=$(ft_PREFIX) ..
 #	cd $(ft_BLD_DIR) && $(MAKE)
 
+$(sdl2ttf_Build): $(sdl2ttf_Unpack)
+	mkdir -p $(sdl2ttf_BLD_DIR) && cd $(sdl2ttf_BLD_DIR) && LDFLAGS=-Wl,-framework,CoreAudio,-framework,AudioToolbox,-framework,CoreFoundation,-framework,CoreGraphics,-framework,CoreVideo,-framework,ForceFeedback,-framework,IOKit,-framework,Carbon,-framework,AppKit LIBS=-liconv $(sdl2ttf_SRC_DIR)/configure --with-freetype-prefix=$(ft_PREFIX) --with-sdl-prefix=$(sdl2_PREFIX) --prefix=$(sdl2ttf_PREFIX)
+	cd $(sdl2ttf_BLD_DIR) && $(MAKE)
+
 install: $(dep_INSTALL_DIR) $(glew_Install) $(glm_Install) $(sdl2_Install) $(debugbreak_Install) $(stb_Install) $(ft_Install)
 
 $(glew_Install):
@@ -246,6 +259,9 @@ $(stb_Install): | $(stb_IDIR)
 
 $(ft_Install):
 	cd $(ft_SRC_DIR)/build && $(MAKE) install
+
+$(sdl2ttf_Install):
+	cd $(sdl2ttf_SRC_DIR)/build && $(MAKE) install
 
 .PHONY: clean
 clean:

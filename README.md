@@ -246,3 +246,148 @@ With this lesson we get a [camera transform](https://github.com/zenglenn42/openg
 We wrap up with a more complicated monkey mesh exported from Blender and lit using [Lambertian lighting](https://en.wikipedia.org/wiki/Lambertian_reflectance).
 
 ![alt tag](img/tutorial-7-lambertianmonkey.png)
+
+# Huh, can we get a user-interface for that monkey?
+
+It seems like a reasonable question.  Sure, the motion-transforming stone monkey in its own window is nice, but an ability to select textures on the fly or maybe pause the movement seems a modest enhancement.
+
+But then the question of portability crops up.  UI's are inherently tied to the look and feel of the target platform and generally require you to compile and link against somem platform SDK.
+
+However, do I really want to take the plunge on one platform's UI idiosyncrasies?  Maybe someone has done some of the hard work of creating a cross-platformm UI solution.
+
+Among some [options](https://insights.dice.com/2016/11/18/5-cross-platform-guis-for-c/) for C++ developers discussed here, Qt and wxWidgets look interesting.
+
+But is there something lighter weight I can slap into the build?  Along the lines of GLUT/GLUI?
+
+Turns out there are some [SDL2 widgets](http://members.chello.nl/w.boeke/SDL-widgets/index.html) running around in the world.  Presumably these are confered with SDL's inherent portability.
+
+# Building SDL-widgets
+
+I'd like to build SDL-widgets (and any of it's dependencies) from source in keeping with my current pattern.
+
+Roughly, I learn:
+
+	SDL2-widgets --depends-upon--> SDL2_ttf (for TrueType font support)
+
+	SDL2_ttf --depends-upon--> freetype2 (for general font rendering)
+
+I snag the freetype source archive off the web and notice it has a cmake build front-end.  But trying that doesn't seem to build / install freetype-config on macOS (10.13).  This is required by the upstream SDL2_ttf build, so time to dig in deeper.
+
+The official freetype build readme says the cmake offering is a community add-on, but the *supported* OS X build is the lower-level unix-style autotools build.  Doing that works.
+
+# Building SDL_ttf
+
+This also looks to be a classic "configure / make / make install" build as well.  Using this configuration:
+
+```
+../configure --with-freetype-prefix=/path/2/opengl-tutorial-tbb-dependencies 
+             --with-sdl-prefix=/path/2/opengl-tutorial-tbb-dependencies 
+             --prefix=/path/2/opengl-tutorial-tbb-dependencies
+```
+gets me past the compile stage, but I'm hitting a mighty number of missing symbols at libtool link-time:
+
+```
+libtool: link: gcc -dynamiclib  -o .libs/libSDL2_ttf-2.0.0.dylib  .libs/SDL_ttf.o   
+   -L/path/2/opengl-tutorial-tbb-dependencies/lib /path/2/opengl-tutorial-tbb-dependencies/lib/libfreetype.dylib -lz -lbz2 
+   -L/path/2/opengl-tutorial-tbb-dependencies/lib -lSDL2    
+   -install_name /path/2/opengl-tutorial-tbb-dependencies/lib/libSDL2_ttf-2.0.0.dylib 
+   -compatibility_version 15 -current_version 15.0 -Wl,-single_module
+Undefined symbols for architecture x86_64:
+  "_AudioObjectAddPropertyListener", referenced from:
+      _COREAUDIO_Init in libSDL2.a(SDL_coreaudio.m.o)
+      _audioqueue_thread in libSDL2.a(SDL_coreaudio.m.o)
+  ..."
+  "_objc_sync_enter", referenced from:
+      _ScheduleContextUpdates in libSDL2.a(SDL_cocoawindow.m.o)
+      -[SDLOpenGLContext setWindow:] in libSDL2.a(SDL_cocoaopengl.m.o)
+  "_objc_sync_exit", referenced from:
+      _ScheduleContextUpdates in libSDL2.a(SDL_cocoawindow.m.o)
+      -[SDLOpenGLContext setWindow:] in libSDL2.a(SDL_cocoaopengl.m.o)
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+```
+
+Seems like I'm missing stock macOS frameworks from the build, a pretty fundamental omission.  
+
+But digging around in the readme for this package yields little joy when I go grep'ing for framework and darwin.  Lord Google says [AudioObjectAddPropertyListener](https://developer.apple.com/documentation/coreaudio/1422472-audioobjectaddpropertylistener) comes from the Core Audio package for starters.
+
+But where does *that* live on a dev-ready system in the macOS universe?  Is it stand-alone?  Does it come bundled with Xcode?
+
+Some brute force greps from root come up dry.  So I jump into Xcode IDE itself, since it should have situational awareness on the standard rocks to look under for Apple frameworks.  Going to:
+
+Project / Build Rules / Link Binary With Libraries
+
+and attempting to add("+") an addtional framework brings up a searchable list which includes:
+
+macOS 10.13
+	CoreAudio.framework
+
+Not sure I *need to know*, but I'm curious where these frameworks actually live.  Adding a framework through the UI allows me to right-click and do a "Show In Finder" option, yielding:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreAudio.framework
+
+Dang, that's pretty involved.  
+
+But maybe I just wedge a "-framework Blah" into LDFLAGS at configure time and the tooling will *find* that framework?  [This](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/MachOTopics/1-Articles/building_files.html) has general macOS build-fu, by the way.
+
+To speed up the process, I iterate by invoking libtool directly from the command-line, naively just adding *-framework CoreAudio* for starters, but eventually settling upon adding this at the end of the libtool invocation: 
+
+```
+libtool ...  -Wl,-framework,CoreAudio
+```
+
+That knocks down 4 of the missing AudioObject* symbols:
+
+```
+sdiff j1 j2|more
+libtool: link: gcc -dynamiclib  -o .libs/libSDL2_ttf-2.0.0.dy | libtool: link: gcc -dynamiclib  -o .libs/libSDL2_ttf-2.0.0.dy
+Undefined symbols for architecture x86_64:                      Undefined symbols for architecture x86_64:
+  "_AudioObjectAddPropertyListener", referenced from:         <
+      _COREAUDIO_Init in libSDL2.a(SDL_coreaudio.m.o)         <
+      _audioqueue_thread in libSDL2.a(SDL_coreaudio.m.o)      <
+  "_AudioObjectGetPropertyData", referenced from:             <
+      _COREAUDIO_OpenDevice in libSDL2.a(SDL_coreaudio.m.o)   <
+      _audioqueue_thread in libSDL2.a(SDL_coreaudio.m.o)      <
+      _device_unplugged in libSDL2.a(SDL_coreaudio.m.o)       <
+      _build_device_list in libSDL2.a(SDL_coreaudio.m.o)      <
+  "_AudioObjectGetPropertyDataSize", referenced from:         <
+      _build_device_list in libSDL2.a(SDL_coreaudio.m.o)      <
+  "_AudioObjectRemovePropertyListener", referenced from:      <
+      _COREAUDIO_CloseDevice in libSDL2.a(SDL_coreaudio.m.o)  <
+      _COREAUDIO_Deinitialize in libSDL2.a(SDL_coreaudio.m.o) <
+  "_AudioQueueAllocateBuffer", referenced from:                   "_AudioQueueAllocateBuffer", referenced from:
+      _audioqueue_thread in libSDL2.a(SDL_coreaudio.m.o)              _audioqueue_thread in libSDL2.a(SDL_coreaudio.m.o)
+  "_AudioQueueDispose", referenced from:                          "_AudioQueueDispose", referenced from:
+```
+
+So I think we're onto something. Just need to keep playing this game by adding additional frameworks:
+
+```
+libtool ...
+-Wl,-framework,CoreAudio,-framework,AudioToolbox,-framework,CoreFoundation,-framework,CoreGraphics,-framework,CoreVideo,-framework,ForceFeedback,-framework,IOKit,-framework,Carbon,-framework,AppKit -liconv
+```
+
+And now I get a sweet .libs directory in my build directory with the following:
+
+```
+ ls -1 .libs
+SDL_ttf.o
+libSDL2_ttf-2.0.0.dylib
+libSDL2_ttf-2.0.0.dylib.dSYM
+libSDL2_ttf.a
+libSDL2_ttf.dylib
+libSDL2_ttf.la
+libSDL2_ttf.lai
+```
+
+The question is, what is the *right* way to tuck these amendments into the SDL2 ttf build?
+
+Setting the LDFLAGS and LIBS shell variables when invoking configure does the trick:
+
+```
+LDFLAGS=-Wl,-framework,CoreAudio,-framework,AudioToolbox,-framework,CoreFoundation,-framework,CoreGraphics,-framework,CoreVideo,-framework,ForceFeedback,-framework,IOKit,-framework,Carbon,-framework,AppKit LIBS=-liconv ../configure --with-freetype-prefix=/path/2/opengl-tutorial-tbb-dependencies 
+             --with-sdl-prefix=/path/2/opengl-tutorial-tbb-dependencies 
+             --prefix=/path/2/opengl-tutorial-tbb-dependencies
+```
+
+This allows me to complete the build stanza in the dependencies makefile for SDL2_tff.
