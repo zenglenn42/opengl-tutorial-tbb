@@ -666,3 +666,11 @@ Huh, stuff seems to be compiling and linking now.  But does anything run?
 Holé Molé ... kinda working.  Not sure about the "unexpected event", but progress.
 
 ![alt tag](img/sdl2widgets-bouncy-tune.png)
+
+Looks like the unexpected events may related to unhandled mouse movements in some contxt.
+
+## Sweet
+
+The example audio function generator, make-waves, built and is generating tones on my machine.
+
+![alt tag](img/sdl2widgets-make-waves.png)
