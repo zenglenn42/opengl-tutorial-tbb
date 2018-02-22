@@ -322,7 +322,7 @@ Digging around in the readme for this package yields little joy when I go grep'i
 
 But where does *that* live on a dev-ready system in the macOS universe?  Is it stand-alone?  Does it come bundled with Xcode?
 
-Some brute force greps from root come up dry.  So I jump into Xcode IDE itself, since it should have situational awareness on the standard rocks to look under for Apple frameworks.  Going to:
+Some brute force greps from root come up dry.  So I jump into the Xcode IDE itself, since it should have situational awareness on the standard rocks to look under for Apple frameworks.  Going to:
 
 Project / Build Rules / Link Binary With Libraries
 
