@@ -170,7 +170,7 @@ Went ahead and cleaned up a [programmatic model of a cone](https://github.com/ze
 
 This is a view from the top, so it appears as a circle in two dimensions.
 
-After thought, this model will have to be tweaked for sure.  I implemented it just with slices (no cross-sectional circular stacks).  Therefore it won't be conducive to specular lighting effects since I'll only have vectors sprouting off the pinancle and the circular base, and none along the surface of the cone to catch gleams of simulated light.
+After some thought, this model will have to be tweaked for sure.  I implemented it just with slices (no cross-sectional circular stacks).  Therefore it won't be conducive to specular lighting effects since I'll only have normal vectors sprouting off the pinancle and the circular base positional vertices, and none along the surface of the cone to catch gleams of simulated light.
 
 # All your stoned doritos are belong to us!
 
