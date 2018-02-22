@@ -680,7 +680,7 @@ Looks like the unexpected events may relate to unhandled mouse movements in some
 
 ## Sweet
 
-The example audio function generator, make-waves, built and is generating tones on my machine.
+The example audio function generator, make-waves, now builds and generates tones on my machine.
 
 ![alt tag](img/sdl2widgets-make-waves.png)
 
