@@ -510,7 +510,7 @@ CFLAGS is being_overridden
 Optionally we could just load-up CLFAGS as a make variable, but we'll need to test that these are flowing nicely into any sub-builds.
 
 ```
-$ CFLAGS=being_overridden make CFLAGS=being_overriden
+$ make CFLAGS=being_overriden
 CFLAGS is being_overridden
 ```
 
