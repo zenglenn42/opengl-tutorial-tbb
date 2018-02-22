@@ -251,7 +251,7 @@ We wrap up with a more complicated monkey mesh exported from Blender and lit usi
 
 It seems like a reasonable question.  Sure, the motion-transforming stone monkey in its own window is nice, but an ability to select textures on the fly or maybe pause the movement seems a modest enhancement.
 
-But then the question of portability crops up.  UI's are inherently tied to the look and feel of the target platform and generally require you to compile and link against somem platform SDK.
+But then the question of portability crops up.  UI's are inherently tied to the look and feel of the target platform and generally require you to compile and link against some platform SDK.
 
 However, do I really want to take the plunge on one platform's UI idiosyncrasies?  Maybe someone has done some of the hard work of creating a cross-platformm UI solution.
 
