@@ -42,6 +42,8 @@ top_DIR = $(PWD)
 # Tools isolation
 
 CMAKE = cmake
+TAR   = tar
+UNZIP = unzip
 
 # Build and install dependencies out of tree.
 
@@ -190,36 +192,36 @@ unzip_FLAGS = $(unzip_CURRENT_TIME)
 
 glew_Unpack = $(glew_SRC_DIR)/Makefile
 $(glew_Unpack): $(glew_SRC_ZIP)
-	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(glew_SRC_ZIP)
+	cd $(dep_BUILD_DIR) && $(UNZIP) $(unzip_FLAGS) $(glew_SRC_ZIP)
 
 glm_Unpack = $(glm_SRC_DIR)/CMakeLists.txt
 $(glm_Unpack): $(glm_SRC_ZIP)
-	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(glm_SRC_ZIP)
+	cd $(dep_BUILD_DIR) && $(UNZIP) $(unzip_FLAGS) $(glm_SRC_ZIP)
 
 sdl2_Unpack = $(sdl2_SRC_DIR)/CMakeLists.txt
 $(sdl2_Unpack): $(sdl2_SRC_ZIP)
-	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(sdl2_SRC_ZIP)
+	cd $(dep_BUILD_DIR) && $(UNZIP) $(unzip_FLAGS) $(sdl2_SRC_ZIP)
 
 debugbreak_Unpack = $(debugbreak_SRC_DIR)/GNUmakefile
 $(debugbreak_Unpack): $(debugbreak_SRC_ZIP)
-	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(debugbreak_SRC_ZIP)
+	cd $(dep_BUILD_DIR) && $(UNZIP) $(unzip_FLAGS) $(debugbreak_SRC_ZIP)
 
 stb_Unpack = $(stb_SRC_DIR)/README.md
 $(stb_Unpack): $(stb_SRC_ZIP)
-	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(stb_SRC_ZIP)
+	cd $(dep_BUILD_DIR) && $(UNZIP) $(unzip_FLAGS) $(stb_SRC_ZIP)
 
 ft_Unpack = $(ft_SRC_DIR)/configure
-untar_FLAGS = -zxvf
+untar_FLAGS = -zxvmf
 $(ft_Unpack): $(ft_SRC_GZ)
-	cd $(dep_BUILD_DIR) && tar $(untar_FLAGS) $(ft_SRC_GZ)
+	cd $(dep_BUILD_DIR) && $(TAR) $(untar_FLAGS) $(ft_SRC_GZ)
 
 sdl2ttf_Unpack = $(sdl2ttf_SRC_DIR)/configure
 $(sdl2ttf_Unpack): $(sdl2ttf_SRC_ZIP)
-	cd $(dep_BUILD_DIR) && unzip $(unzip_FLAGS) $(sdl2ttf_SRC_ZIP)
+	cd $(dep_BUILD_DIR) && $(UNZIP) $(unzip_FLAGS) $(sdl2ttf_SRC_ZIP)
 
 sdl2widgets_Unpack = $(sdl2widgets_SRC_DIR)/configure
 $(sdl2widgets_Unpack): $(sdl2widgets_SRC_GZ)
-	cd $(dep_BUILD_DIR) && tar $(untar_FLAGS) $(sdl2widgets_SRC_GZ)
+	cd $(dep_BUILD_DIR) && $(TAR) $(untar_FLAGS) $(sdl2widgets_SRC_GZ)
 
 $(glew_Build): $(glew_Unpack)
 	cd $(glew_SRC_DIR) && $(MAKE) GLEW_PREFIX=$(glew_PREFIX) GLEW_DEST=$(glew_DEST)
@@ -254,8 +256,9 @@ $(ft_Build): $(ft_Unpack)
 #	mkdir -p $(ft_BLD_DIR) && cd $(ft_BLD_DIR) && $(CMAKE) -DCMAKE_INSTALL_PREFIX=$(ft_PREFIX) ..
 #	cd $(ft_BLD_DIR) && $(MAKE)
 
+sdl2_FRAMEWORKS=-Wl,-framework,CoreAudio,-framework,AudioToolbox,-framework,CoreFoundation,-framework,CoreGraphics,-framework,CoreVideo,-framework,ForceFeedback,-framework,IOKit,-framework,Carbon,-framework,AppKit
 $(sdl2ttf_Build): $(sdl2ttf_Unpack) $(sdl2_Install) $(ft_Install)
-	mkdir -p $(sdl2ttf_BLD_DIR) && cd $(sdl2ttf_BLD_DIR) && LDFLAGS=-Wl,-framework,CoreAudio,-framework,AudioToolbox,-framework,CoreFoundation,-framework,CoreGraphics,-framework,CoreVideo,-framework,ForceFeedback,-framework,IOKit,-framework,Carbon,-framework,AppKit LIBS=-liconv $(sdl2ttf_SRC_DIR)/configure --with-freetype-prefix=$(ft_PREFIX) --with-sdl-prefix=$(sdl2_PREFIX) --prefix=$(sdl2ttf_PREFIX)
+	mkdir -p $(sdl2ttf_BLD_DIR) && cd $(sdl2ttf_BLD_DIR) && LDFLAGS=$(sdl2_FRAMEWORKS) LIBS=-liconv $(sdl2ttf_SRC_DIR)/configure --with-freetype-prefix=$(ft_PREFIX) --with-sdl-prefix=$(sdl2_PREFIX) --prefix=$(sdl2ttf_PREFIX)
 	cd $(sdl2ttf_BLD_DIR) && $(MAKE)
 
 $(sdl2widgets_Build): $(sdl2widgets_Unpack)
