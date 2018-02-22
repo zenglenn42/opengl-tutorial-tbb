@@ -506,3 +506,55 @@ CFLAGS is being_overridden
 ```
 
 The ctor signature issue makes me wonder, though.  If I have to tweak the code itself, I could add a pre-build patch around the upstream code.  Ug, I just want this stuff to *build* so I can play with a little UI.  Maybe I just fork this thing on github, make my fixes there and make *that* my baseline for SDL2-widgets.  That way I can make progress without a bunch of impedance and maybe share some fixes with the upstream if I'm feeling sassy.
+
+## The first build error ...
+
+```
+./sdl-widgets.h:147:3: note: candidate constructor not viable: no known conversion from '(lambda at testsw.cpp:114:7)' to 'void (*)(Button *)' for 5th argument
+```
+
+Huh, so testsw is using a lambda expression for the 4th parameter of the Button ctor:
+
+testsw.cpp
+```
+    19 #include "sdl-widgets.h"
+       ...
+   112   void init() {
+   113     start_but=new Button(bgwin,0,Rect(100,80,32,16),"stop",
+>> 114       [&](Button *but) {
+>> 115         run=!run;
+>> 116         but->label= !run ? "start" : "stop";
+>> 117         if (run) SDL_CreateThread(thread_fun,"thread_fun", 0);
+>> 118       });
+```
+whereas we expect a pointer to a function returning void and taking a pointer to a Button as its only paramter.
+
+sdl-widgets.h
+```
+   142 struct Button:WinBase {
+   143   bool is_down;
+   144   Style style;
+   145   Label label;
+   146   void (*cmd)(Button*);
+>> 147   Button(WinBase *pw,Style,Rect,Label lab,void (*cmd)(Button*),const char *title=0);
+   148   void draw();                            --------------------
+   149 };
+```
+
+Ah, so maybe we just need to wedge a return declation into the lambda? 
+
+```
+[ captures ] (parameters) -> returnTypesDeclaration { lambdaStatements; }
+                          -------------------------
+```
+Trying ...
+
+```
+   113     start_but=new Button(bgwin,0,Rect(100,80,32,16),"stop",
+>> 114       [&](Button *but) -> void {
+   115         run=!run;
+```
+
+That doesn't seem to work.  Same error.
+
+Guessing the upstream porting compiler was more relaxed than mine on macOS.  This [fu on stackoverflow](https://stackoverflow.com/questions/28746744/passing-lambda-as-function-pointer) says lambda's cannot be converted to function pointers if they *capture* (which is what the [&] is all about) according to a draft standard of C++11.  And it looks like in our case, there is a global boolean called 'run' that's being capture to the lambda.  Hmm.

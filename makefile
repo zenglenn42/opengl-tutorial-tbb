@@ -169,7 +169,8 @@ sdl2widgets_SRC_GZ = $(dep_ZIP_DIR)/SDL2-widgets-$(sdl2widgets_VERSION).tar.gz
 sdl2widgets_SRC_DIR = $(dep_BUILD_DIR)/SDL2-widgets-$(sdl2widgets_VERSION)
 sdl2widgets_PREFIX  = $(dep_INSTALL_DIR)
 sdl2widgets_BLD_DIR = $(sdl2widgets_SRC_DIR)
-sdl2widgets_Build   = $(sdl2widgets_BLD_DIR)/Makefile
+#sdl2widgets_Build   = $(sdl2widgets_BLD_DIR)/Makefile
+sdl2widgets_Build   = $(sdl2widgets_BLD_DIR)/sdl-widgets.a
 sdl2widgets_Install = $(sdl2widgets_PREFIX)/lib/sdl-widgets.a
 
 default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build) $(debugbreak_Build) $(stb_Build) $(ft_Build) $(sdl2ttf_Build) 
