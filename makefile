@@ -254,7 +254,7 @@ $(ft_Build): $(ft_Unpack)
 #	mkdir -p $(ft_BLD_DIR) && cd $(ft_BLD_DIR) && $(CMAKE) -DCMAKE_INSTALL_PREFIX=$(ft_PREFIX) ..
 #	cd $(ft_BLD_DIR) && $(MAKE)
 
-$(sdl2ttf_Build): $(sdl2ttf_Unpack)
+$(sdl2ttf_Build): $(sdl2ttf_Unpack) $(sdl2_Install) $(ft_Install)
 	mkdir -p $(sdl2ttf_BLD_DIR) && cd $(sdl2ttf_BLD_DIR) && LDFLAGS=-Wl,-framework,CoreAudio,-framework,AudioToolbox,-framework,CoreFoundation,-framework,CoreGraphics,-framework,CoreVideo,-framework,ForceFeedback,-framework,IOKit,-framework,Carbon,-framework,AppKit LIBS=-liconv $(sdl2ttf_SRC_DIR)/configure --with-freetype-prefix=$(ft_PREFIX) --with-sdl-prefix=$(sdl2_PREFIX) --prefix=$(sdl2ttf_PREFIX)
 	cd $(sdl2ttf_BLD_DIR) && $(MAKE)
 
