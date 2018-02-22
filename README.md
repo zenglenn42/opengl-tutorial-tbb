@@ -667,7 +667,7 @@ Holé Molé ... kinda working.  Not sure about the "unexpected event", but progr
 
 ![alt tag](img/sdl2widgets-bouncy-tune.png)
 
-Looks like the unexpected events may related to unhandled mouse movements in some contxt.
+Looks like the unexpected events may relate to unhandled mouse movements in some contxt.
 
 ## Sweet
 
