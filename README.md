@@ -470,7 +470,7 @@ make[1]: *** [testsw.o] Error 1
 
 Those compile errors above are not a good sign.
 
-For a reality check on portability, I dig into the actual configure script.  It's not a rigorous m4-based autogen'd thing, but an expedient bit of build glue.  It's better than no configure script, but I'm calibrating my expectations downward.  At least it seems to be finding my SDL2 and SDL2_ttf libraries out of my build tree:
+For a reality check on portability, I dig into the actual configure script.  It's not a rigorous m4-based autogen'd thing, but an expedient bit of build glue.  It's better than no configure script.  *I* don't even have a configure script for my build, but that doesn't stop me from feeling slightly judgmental as I calibrate my expectations downward.  At least it seems to be finding my SDL2 and SDL2_ttf libraries out of my build tree:
 
 ```
 Searching libraries in /Users/m/Learn/opengl-tutorial-tbb-dependencies/lib
