@@ -495,3 +495,14 @@ shapes.h:#ifdef __MINGW32__
 ```
 
 Hopefully I can horse-whisper this build to life with a few macOS tweaks.
+
+## Can I do this without touching the code?
+
+Sometimes you can make a build dance, marionette-style, by pulling the right strings.  One option may be to override build settings from the calling environment by invoking make with -e:
+
+```
+$ CFLAGS=being_overridden make -e
+CFLAGS is being_overridden
+```
+
+The ctor signature issue makes me wonder, though.  If I have to tweak the code itself, I could add a pre-build patch around the upstream code.  Ug, I just want this stuff to *build* so I can play with a little UI.  Maybe I just fork this thing on github, make my fixes there and make *that* my baseline for SDL2-widgets.  That way I can make progress without a bunch of impedance and maybe share some fixes with the upstream if I'm feeling sassy.
