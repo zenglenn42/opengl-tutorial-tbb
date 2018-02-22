@@ -340,7 +340,7 @@ Dang, that's pretty involved.
 
 But maybe I just wedge a "-framework Blah" into LDFLAGS at configure time and the tooling will *find* that framework?  ([This](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/MachOTopics/1-Articles/building_files.html) has general macOS build-fu, by the way.)
 
-To speed up the process, I iterate by invoking libtool directly from the command-line, naively just adding *-framework CoreAudio* for starters, but eventually settling upon this idiom at the end of the libtool invocation: 
+To speed up the process, I iterate by invoking libtool directly from the command-line, naively just adding *-framework CoreAudio* for starters, but eventually settle upon this idiom at the end of the libtool invocation: 
 
 ```
 libtool ...  -Wl,-framework,CoreAudio
