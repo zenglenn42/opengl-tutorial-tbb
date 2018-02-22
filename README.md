@@ -309,9 +309,16 @@ ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 ```
 
-Seems like I'm missing stock macOS frameworks from the build, a pretty fundamental omission.  
+Seems like I'm missing stock macOS frameworks from the build, a pretty fundamental omission.  But that's probably more an issue with how libSDL2.a was built as opposed to an underlying issue in the SDL2_ttf build itself.  Here's a clue:
 
-But digging around in the readme for this package yields little joy when I go grep'ing for framework and darwin.  Lord Google says [AudioObjectAddPropertyListener](https://developer.apple.com/documentation/coreaudio/1422472-audioobjectaddpropertylistener) comes from the Core Audio package for starters.
+```
+nm libSDL2.a | grep AudioObjectAddPropertyListener
+                 U _AudioObjectAddPropertyListener
+```
+
+One of the the missing symbols is referenced by libSDL2 itself, but is undefined therein.  I suppose we could try to statically link that stuff into libSDL2.a, or just make the SDL2_ttf build smarter about finding those sysmbols out of the right frameworks on the macOS build machine.
+
+Digging around in the readme for this package yields little joy when I go grep'ing for framework and darwin.  Lord Google says [AudioObjectAddPropertyListener](https://developer.apple.com/documentation/coreaudio/1422472-audioobjectaddpropertylistener) comes from the Core Audio package for starters.
 
 But where does *that* live on a dev-ready system in the macOS universe?  Is it stand-alone?  Does it come bundled with Xcode?
 
