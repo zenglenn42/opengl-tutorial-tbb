@@ -32,6 +32,7 @@
 		0CAFDBCB2030C9EC0074AB4E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */; };
 		0CC6162620370C1C007DD4C5 /* obj_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CC6162520370C1C007DD4C5 /* obj_loader.cpp */; };
 		0CC6162B203713A1007DD4C5 /* monkey3.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CC6162A20371379007DD4C5 /* monkey3.obj */; };
+		0CE4F444203EF8020014F1B6 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7D820301CE500FCCDDD /* CoreAudio.framework */; };
 		0CEC6F592035EAE6008BE2B8 /* altShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CEC6F582035EAA2008BE2B8 /* altShader.fs */; };
 		0CEC6F5A2035EAE6008BE2B8 /* altShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CEC6F572035EAA1008BE2B8 /* altShader.vs */; };
 		0CF6FBD7203121FB00CC0E13 /* gldebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */; };
@@ -106,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CE4F444203EF8020014F1B6 /* CoreAudio.framework in Frameworks */,
 				0C93A7E72030227F00FCCDDD /* Carbon.framework in Frameworks */,
 				0C93A7E32030200300FCCDDD /* IOKit.framework in Frameworks */,
 				0C93A7E120301FB500FCCDDD /* ForceFeedback.framework in Frameworks */,
