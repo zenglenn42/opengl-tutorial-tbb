@@ -261,7 +261,7 @@ But is there something lighter weight I can slap into the build?  Along the line
 
 Turns out there are some [SDL2 widgets](http://members.chello.nl/w.boeke/SDL-widgets/index.html) running around in the world.  Presumably these are confered with SDL's inherent portability.
 
-# Building SDL-widgets
+# Building SDL-widgets' dependencies ...
 
 I'd like to build SDL-widgets (and any of its dependencies) from source in keeping with my current pattern.
 
@@ -392,3 +392,97 @@ LDFLAGS=-Wl,-framework,CoreAudio,-framework,AudioToolbox,-framework,CoreFoundati
 ```
 
 This allows me to complete the build stanza in the dependencies makefile for SDL2_tff.
+
+# Building SDL-widgets on macOS
+
+This is gonna be a slam-dunk, right?  All the dependencies nicely handled.  No.
+
+The widget build expects sdl2-config to be in the executable search path:
+
+Makefile
+```
+CFLAGS := -g -O $$(sdl2-config --cflags) ...
+LFLAGS := $$(sdl2-config --libs) ...
+```
+which expands to the appropriate -I and -L pathing needed by the compiler and linker to build against SDL2.
+
+We achieve that by adding sdl2-config's path to PATH before invoking the widget configure and make steps in our dependency makefile:
+
+```
+sdl2_PREFIX = $(dep_INSTALL_DIR)
+sdl2_config_PATH = $(sdl2_PREFIX)/bin
+...
+$(sdl2widgets_Build): $(sdl2widgets_Unpack)
+        mkdir -p $(sdl2widgets_BLD_DIR) && cd $(sdl2widgets_BLD_DIR) && PATH=$(PATH):$(sdl2_config_PATH) ./configure
+        export PATH=$(PATH):$(sdl2_config_PATH) && cd $(sdl2widgets_BLD_DIR) && $(MAKE)
+```
+
+But we're still not out of the woods on macOS :-/
+
+```
+make sdl2widgets
+mkdir -p /Users/m/Learn/opengl-tutorial-tbb/../opengl-tutorial-tbb-build-dependencies/SDL2-widgets-2.1 && cd /Users/m/Learn/opengl-tutorial-tbb/../opengl-tutorial-tbb-build-dependencies/SDL2-widgets-2.1 && PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/CMake.app/Contents/bin:/Users/m/Learn/opengl-tutorial-tbb/../opengl-tutorial-tbb-dependencies/bin ./configure
+-n Searching C++ compiler ... 
+yes
+-n Searching sdl2-config ... 
+yes
+Dummy object-file for testing g++ compiler ...
+okay
+Searching libraries in /Users/m/Learn/opengl-tutorial-tbb-dependencies/lib
+-n library SDL2 ... 
+yes
+-n library SDL2_ttf ... 
+yes
+Specify font files ... 
+Created: config.h. Now you can run 'make'
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/CMake.app/Contents/bin:/Users/m/Learn/opengl-tutorial-tbb/../opengl-tutorial-tbb-dependencies/bin && cd /Users/m/Learn/opengl-tutorial-tbb/../opengl-tutorial-tbb-build-dependencies/SDL2-widgets-2.1 && /Applications/Xcode.app/Contents/Developer/usr/bin/make
+g++ -c testsw.cpp -g -O $(sdl2-config --cflags) -std=c++11 -Wall -Wuninitialized -Wshadow -Wno-non-virtual-dtor -Wno-delete-non-virtual-dtor -Wno-multichar
+testsw.cpp:113:19: error: no matching constructor for initialization of 'Button'
+    start_but=new Button(bgwin,0,Rect(100,80,32,16),"stop",
+                  ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./sdl-widgets.h:147:3: note: candidate constructor not viable: no known conversion from '(lambda at testsw.cpp:114:7)' to 'void (*)(Button *)' for 5th argument
+  Button(WinBase *pw,Style,Rect,Label lab,void (*cmd)(Button*),const char *title=0);
+  ^
+./sdl-widgets.h:142:8: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 5 were provided
+struct Button:WinBase {
+       ^
+./sdl-widgets.h:142:8: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 5 were provided
+testsw.cpp:351:5: error: no matching function for call to 'send_uev'
+    send_uev([=](int) { printf("th_fun: n=%d\n",n); },0);
+    ^~~~~~~~
+./sdl-widgets.h:484:6: note: candidate function not viable: no known conversion from '(lambda at testsw.cpp:351:14)' to 'void (*)(int)' for 1st argument
+void send_uev(void (*cmd)(int),int par);
+     ^
+2 errors generated.
+make[1]: *** [testsw.o] Error 1
+```
+
+## Um, has this been ported to macOS yet?
+
+Those compile errors above are not a good sign.
+
+For a reality check on portability, I dig into the actual configure script.  It's not a rigorous m4-based autogen'd thing, but an expedient bit of build glue.  It's better than no configure script, but I'm calibrating my expectations downward.  At least it seems to be finding my SDL2 and SDL2_ttf libraries out of my build tree:
+
+```
+Searching libraries in /Users/m/Learn/opengl-tutorial-tbb-dependencies/lib
+-n library SDL2 ...
+yes
+-n library SDL2_ttf ...
+yes
+```
+
+The references to MinGW running around in the code suggest the porting sweetspot may have been a Windows box with [MinGW](http://mingw.org/) installed:
+
+```
+grep -i mingw *
+Build-on-Windows.txt:STEPS TO BUILD ON WINDOWS WITH MINGW
+mingw32-specific.cpp:#ifdef __MINGW32__
+sdl-widgets.cpp:#ifdef __MINGW32__
+sdl-widgets.cpp:#ifdef __MINGW32__
+sdl-widgets.cpp:#ifdef __MINGW32__
+sdl-widgets.cpp:#ifdef __MINGW32__
+shapes.cpp:#ifdef __MINGW32__
+shapes.h:#ifdef __MINGW32__
+```
+
+Hopefully I can horse-whisper this build to life with a few macOS tweaks.
