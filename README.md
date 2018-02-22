@@ -507,7 +507,7 @@ CFLAGS is being_overridden
 
 The ctor signature issue makes me wonder, though.  If I have to tweak the code itself, I could add a pre-build patch around the upstream code.  Ug, I just want this stuff to *build* so I can play with a little UI.  Maybe I just fork this thing on github, make my fixes there and make *that* my baseline for SDL2-widgets.  That way I can make progress without a bunch of impedance and maybe share some fixes with the upstream if I'm feeling sassy.
 
-## The first build error ...
+## The 1st build error (testsw.cpp)
 
 ```
 ./sdl-widgets.h:147:3: note: candidate constructor not viable: no known conversion from '(lambda at testsw.cpp:114:7)' to 'void (*)(Button *)' for 5th argument
@@ -541,7 +541,7 @@ sdl-widgets.h
    149 };
 ```
 
-Ah, so maybe we just need to wedge a return declation into the lambda? 
+Ah, so maybe we just need to wedge a return declaration into the lambda? 
 
 ```
 [ captures ] (parameters) -> returnTypesDeclaration { lambdaStatements; }
@@ -558,3 +558,110 @@ Trying ...
 That doesn't seem to work.  Same error.
 
 Guessing the upstream porting compiler was more relaxed than mine on macOS.  This [fu on stackoverflow](https://stackoverflow.com/questions/28746744/passing-lambda-as-function-pointer) says lambda's cannot be converted to function pointers if they *capture* (which is what the [&] is all about) according to a draft standard of C++11.  And it looks like in our case, there is a global boolean called 'run' that's being capture to the lambda.  Hmm.
+
+So, yeah.  This is breaking because of some ugly test code in this case.  I see other instances of the button lambda that don't capture and just reference spin::run, so I'll just roll with that for now.
+
+```
+113     start_but=new Button(bgwin,0,Rect(100,80,32,16),"stop",
+114       [](Button *but) -> void {
+115         spin::run=!spin::run;
+116         but->label= !spin::run ? "start" : "stop";
+117         if (spin::run) SDL_CreateThread(thread_fun,"thread_fun", 0);
+118       });
+```
+
+## The 2nd build error (testsw.cpp)
+
+```
+testsw.cpp:351:5: error: no matching function for call to 'send_uev'
+    send_uev([=](int) { printf("th_fun: n=%d\n",n); },0);
+    ^~~~~~~~
+./sdl-widgets.h:484:6: note: candidate function not viable: no known conversion from '(lambda at testsw.cpp:351:14)' to 'void (*)(int)' for 1st argument
+void send_uev(void (*cmd)(int),int par);
+```
+
+Looks like the same issue.  I see another lambda with a capture [=] trying to present as a function pointer in the first parameter of send_uev().
+
+testsw.cpp
+```
+    348 int th_fun(void *arg) {
+    349   static int n=0; // output should be: 'th_fun: n=0' 'th_fun: n=1'
+    350   while (n<2) {
+>>  351     send_uev([=](int) { printf("th_fun: n=%d\n",n); },0);
+    352     ++n;
+    353   }
+    354   return 0;
+    355 }
+```
+
+sdl-widgets.h
+```
+>>  484 void send_uev(void (*cmd)(int),int par);
+```
+
+Looks like we can safely drop the [=] since the static local n variable should already be visible to the lambda according to [this](https://stackoverflow.com/questions/43169793/how-does-lambda-capture-local-static-variable).
+
+Hah, that gets me out of build purgatory for testsw.cpp.
+
+## The 3rd build error (sdl-widgets.cpp)
+
+```
+sdl-widgets.cpp:1125:5: error: array initializer must be an initializer list
+    loc((Point[]){ Point(-3,0), Point(3,0), Point(1,mid.y-2), Point(-1,mid.y-2) }), // pointer
+    ^
+```
+
+Um, so what have we got here?  The coder is trying to initialize an array of locations apparently.
+I *do* see loc defined within the Dial class in sdl-widgets.h:
+
+```
+    304 // circular slider
+    305 struct Dial:WinBase {
+    ...
+>>  317   const Point loc[pnt_max];
+
+Ah, that's it.  So we're into the Dial ctor implementation at line 1125 of swl-widgets.cpp and just referencing member data.  In this case, the loc array.
+
+Maybe we can get away with just using:
+
+```
+    loc{Point(-3,0), Point(3,0), Point(1,mid.y-2), Point(-1,mid.y-2)},
+```
+
+instead of
+
+```
+    loc((Point[]){ Point(-3,0), Point(3,0), Point(1,mid.y-2), Point(-1,mid.y-2) }),
+```
+
+Ok, that compiles.  Not sure about the runtime smoke yet. :-)
+
+## And again with the missing frameworks ...
+## The 4th build error (linking testsw)
+
+```
+g++ testsw.o sdl-widgets.a -o testsw $(sdl2-config --libs) -lSDL2_ttf
+Undefined symbols for architecture x86_64:
+  "_AudioObjectAddPropertyListener", referenced from:
+      _COREAUDIO_Init in libSDL2.a(SDL_coreaudio.m.o)
+      _audioqueue_thread in libSDL2.a(SDL_coreaudio.m.o)
+  "_AudioObjectGetPropertyData", referenced from:
+  ... 
+```
+
+Looks like if we can override LDFLAGS with all the framework shizzle we crafted for building libSDL2_ttf.a, we'll probably be good.
+
+Makefile
+```
+>>  4 LFLAGS := $$(sdl2-config --libs) -lSDL2_ttf
+    ...
+   12 %: %.o sdl-widgets.a
+>> 13         $(CC) $< sdl-widgets.a -o $@ $(LFLAGS)
+```
+
+Hmm ... sometimes the build calls it LFLAGS, other times LDFLAGS.  Fixing that.
+Huh, stuff seems to be compiling and linking now.  But does anything run?
+
+Holé Molé ... kinda working.  Not sure about the "unexpected event", but progress.
+
+![alt tag](img/sdl2widgets-bouncy-tune.png)
