@@ -263,7 +263,7 @@ Turns out there are some [SDL2 widgets](http://members.chello.nl/w.boeke/SDL-wid
 
 # Building SDL-widgets
 
-I'd like to build SDL-widgets (and any of it's dependencies) from source in keeping with my current pattern.
+I'd like to build SDL-widgets (and any of its dependencies) from source in keeping with my current pattern.
 
 Roughly, I learn:
 
