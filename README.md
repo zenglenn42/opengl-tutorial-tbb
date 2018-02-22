@@ -619,6 +619,7 @@ I *do* see loc defined within the Dial class in sdl-widgets.h:
     305 struct Dial:WinBase {
     ...
 >>  317   const Point loc[pnt_max];
+```
 
 Ah, that's it.  So we're into the Dial ctor implementation at line 1125 of swl-widgets.cpp and just referencing member data.  In this case, the loc array.
 
