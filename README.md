@@ -271,11 +271,13 @@ Roughly, I learn:
 
 	SDL2_ttf --depends-upon--> freetype2 (for general font rendering)
 
+## Building freetype
+
 I snag the freetype source archive off the web and notice it has a cmake build front-end.  But trying that doesn't seem to build / install freetype-config on macOS (10.13).  This is required by the upstream SDL2_ttf build, so time to dig in deeper.
 
 The official freetype build readme says the cmake offering is a community add-on, but the *supported* OS X build is the lower-level unix-style autotools build.  Doing that *works*.
 
-# Building SDL_ttf
+## Building SDL_ttf
 
 This also looks to be a classic "configure / make / make install" build as well.  Using this configuration:
 
