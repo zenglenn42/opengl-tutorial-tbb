@@ -674,3 +674,5 @@ Looks like the unexpected events may relate to unhandled mouse movements in some
 The example audio function generator, make-waves, built and is generating tones on my machine.
 
 ![alt tag](img/sdl2widgets-make-waves.png)
+
+This puts me in a position to start using these portable user interface elements in my SDL2 applications.
