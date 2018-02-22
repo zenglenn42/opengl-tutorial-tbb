@@ -566,7 +566,7 @@ Trying ...
 
 That doesn't seem to work.  Same error.
 
-Guessing the upstream porting compiler was more relaxed than mine on macOS.  This [fu on stackoverflow](https://stackoverflow.com/questions/28746744/passing-lambda-as-function-pointer) says lambda's cannot be converted to function pointers if they *capture* (which is what the [&] is all about) according to a draft standard of C++11.  And it looks like in our case, there is a global boolean called 'run' that's being capture to the lambda.  Hmm.
+Guessing the upstream porting compiler was more relaxed than mine on macOS.  This [fu on stackoverflow](https://stackoverflow.com/questions/28746744/passing-lambda-as-function-pointer) says lambda's cannot be converted to function pointers if they *capture* (which is what the [&] is all about) according to a draft standard of C++11.  And it looks like in our case, there is a global boolean called 'run' captured to the lambda.  Hmm.
 
 So, yeah.  This is breaking because of some ugly test code in this case.  I see other instances of the button lambda that don't capture and just reference spin::run, so I'll just roll with that for now.
 
