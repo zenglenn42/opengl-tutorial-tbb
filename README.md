@@ -522,7 +522,7 @@ The ctor signature issue makes me wonder, though.  If I have to tweak the code i
 ./sdl-widgets.h:147:3: note: candidate constructor not viable: no known conversion from '(lambda at testsw.cpp:114:7)' to 'void (*)(Button *)' for 5th argument
 ```
 
-Huh, so testsw is using a lambda expression for the 4th parameter of the Button ctor:
+Huh, so testsw is using a lambda expression for the 5th parameter of the Button ctor:
 
 testsw.cpp
 ```
