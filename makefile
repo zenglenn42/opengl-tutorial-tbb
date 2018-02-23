@@ -160,21 +160,21 @@ sdl2ttf_Build   = $(sdl2ttf_BLD_DIR)/Makefile
 sdl2ttf_Install = $(sdl2ttf_PREFIX)/lib/libSDL2_ttf.a
 
 #-----------------------
-# sdl2-widgets-c4ad204.zip
+# sdl2-widgets-*.zip
 #
 # https://github.com/zenglenn42/sdl2-widgets
 # http://members.chello.nl/w.boeke/SDL-widgets/SDL2-widgets-2.1.tar.gz
 # Widgets for SDL2-based apps.
 # Circa ~SDL2-widgets-2.1.tar.gz with a few macOS porting changes
 #-----------------------
-sdl2widgets_VERSION = c4ad204
+sdl2widgets_VERSION = e135c9d
 sdl2widgets_SRC_ZIP = $(dep_ZIP_DIR)/sdl2-widgets-$(sdl2widgets_VERSION).zip
 sdl2widgets_SRC_DIR = $(dep_BUILD_DIR)/sdl2-widgets-master
 sdl2widgets_PREFIX  = $(dep_INSTALL_DIR)
 sdl2widgets_BLD_DIR = $(sdl2widgets_SRC_DIR)
 sdl2widgets_Build   = $(sdl2widgets_BLD_DIR)/sdl-widgets.a
-sdl2widgets_IDIR    = $(sdl2widgets_PREFIX)/include/sdl2widgets
-sdl2widgets_Headers = $(patsubst %, $(sdl2widgets_IDIR)/%, sdl-widgets.h) 
+sdl2widgets_IDIR    = $(sdl2widgets_PREFIX)/include/SDL2
+sdl2widgets_Headers = $(patsubst %, $(sdl2widgets_IDIR)/%, SDL_widgets.h) 
 sdl2widgets_Install = $(sdl2widgets_PREFIX)/lib/sdl-widgets.a $(sdl2widgets_Headers)
 
 default_target: $(dep_BUILD_DIR) $(glew_Build) $(glm_Build) $(sdl2_Build) $(debugbreak_Build) $(stb_Build) $(ft_Build) $(sdl2ttf_Build) $(sdl2widgets_Build)
