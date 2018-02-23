@@ -688,7 +688,7 @@ This puts me in a position to start using these portable user interface elements
 
 # Integrate SDL2-widgets into the Project
 
-I [fork](https://github.com/zenglenn42/sdl2-widgets) the upstream sdl2-widgets repo on github and clean up the build a bit so I could drive it nicely from the tutorial build harness.
+I [fork](https://github.com/zenglenn42/sdl2-widgets) the [upstream sdl2-widgets repo](https://github.com/gale320/sdl2-widgets) on github and clean up the build a bit so I can drive it nicely from the tutorial build harness.
 
 This entails:
 
