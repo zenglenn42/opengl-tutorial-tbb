@@ -160,14 +160,14 @@ sdl2ttf_Build   = $(sdl2ttf_BLD_DIR)/Makefile
 sdl2ttf_Install = $(sdl2ttf_PREFIX)/lib/libSDL2_ttf.a
 
 #-----------------------
-# sdl2-widgets-b8acdda.zip
+# sdl2-widgets-c4ad204.zip
 #
 # https://github.com/zenglenn42/sdl2-widgets
 # http://members.chello.nl/w.boeke/SDL-widgets/SDL2-widgets-2.1.tar.gz
 # Widgets for SDL2-based apps.
 # Circa ~SDL2-widgets-2.1.tar.gz with a few macOS porting changes
 #-----------------------
-sdl2widgets_VERSION = b8acdda
+sdl2widgets_VERSION = c4ad204
 sdl2widgets_SRC_ZIP = $(dep_ZIP_DIR)/sdl2-widgets-$(sdl2widgets_VERSION).zip
 sdl2widgets_SRC_DIR = $(dep_BUILD_DIR)/sdl2-widgets-master
 sdl2widgets_PREFIX  = $(dep_INSTALL_DIR)
@@ -248,14 +248,19 @@ $(ft_Build): $(ft_Unpack)
 	mkdir -p $(ft_BLD_DIR) && cd $(ft_BLD_DIR) && $(ft_SRC_DIR)/configure --prefix=$(ft_PREFIX)
 	cd $(ft_BLD_DIR) && $(MAKE)
 
-sdl2_FRAMEWORKS=-Wl,-framework,CoreAudio,-framework,AudioToolbox,-framework,CoreFoundation,-framework,CoreGraphics,-framework,CoreVideo,-framework,ForceFeedback,-framework,IOKit,-framework,Carbon,-framework,AppKit
+space :=
+space +=
+comma =,
+sdl2_macos_FW  = CoreAudio AudioToolbox CoreFoundation CoreGraphics CoreVideo ForceFeedback IOKit Carbon AppKit
+macos_LDFLAGS = -Wl,-framework,$(subst $(space),$(comma)-framework$(comma),$(sdl2_macos_FW))
+LDFLAGS_OPTS = $(macos_LDFLAGS)
 $(sdl2ttf_Build): $(sdl2ttf_Unpack) $(sdl2_Install) $(ft_Install)
-	mkdir -p $(sdl2ttf_BLD_DIR) && cd $(sdl2ttf_BLD_DIR) && LDFLAGS=$(sdl2_FRAMEWORKS) LIBS=-liconv $(sdl2ttf_SRC_DIR)/configure --with-freetype-prefix=$(ft_PREFIX) --with-sdl-prefix=$(sdl2_PREFIX) --prefix=$(sdl2ttf_PREFIX)
+	mkdir -p $(sdl2ttf_BLD_DIR) && cd $(sdl2ttf_BLD_DIR) && LDFLAGS=$(LDFLAGS_OPTS) LIBS=-liconv $(sdl2ttf_SRC_DIR)/configure --with-freetype-prefix=$(ft_PREFIX) --with-sdl-prefix=$(sdl2_PREFIX) --prefix=$(sdl2ttf_PREFIX)
 	cd $(sdl2ttf_BLD_DIR) && $(MAKE)
 
 $(sdl2widgets_Build): $(sdl2widgets_Unpack) $(sdl2ttf_Install)
 	mkdir -p $(sdl2widgets_BLD_DIR) && cd $(sdl2widgets_BLD_DIR) && PATH=$(PATH):$(sdl2_config_PATH) ./configure
-	export PATH=$(PATH):$(sdl2_config_PATH) && cd $(sdl2widgets_BLD_DIR) && $(MAKE) LDFLAGS_OPTS="$(sdl2_FRAMEWORKS)"
+	export PATH=$(PATH):$(sdl2_config_PATH) && cd $(sdl2widgets_BLD_DIR) && $(MAKE) LDFLAGS_OPTS="$(LDFLAGS_OPTS)"
 
 install: $(dep_INSTALL_DIR) $(glew_Install) $(glm_Install) $(sdl2_Install) $(debugbreak_Install) $(stb_Install) $(ft_Install) $(sdl2ttf_Install) $(sdl2widgets_Install)
 
