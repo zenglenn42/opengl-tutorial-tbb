@@ -684,4 +684,4 @@ The example audio function generator, make-waves, now builds and generates tones
 
 ![alt tag](img/sdl2widgets-make-waves.png)
 
-This puts me in a position to start using these portable user interface elements in my SDL2 applications, though I'm not sure yet how to push to push widgets to a Display object.
+This puts me in a position to start using these portable user interface elements in my SDL2 applications, though I'm not sure yet how to push widgets to a Display object.
