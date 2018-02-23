@@ -692,9 +692,9 @@ I [fork](https://github.com/zenglenn42/sdl2-widgets) the [upstream sdl2-widgets 
 
 This entails:
 
-* Augmenting the makefile so CFLAGS, LDFLAGS, and the path to sdl2-config could be easily overridden from the command-line.
+* Augmenting the makefile so CFLAGS, LDFLAGS, and the path to sdl2-config can be easily overridden from the command-line.
 * Augmenting the makefile to support platform-specific link options (for designating -framework dependencies on macOS).
-* Fixing a couple lambda-related build errors that my uplelvel g++/clang compiler didn't like.
+* Fixing a couple lambda-related build errors that my uplelvel g++/clang compiler doesn't like.
 * Creating a single exported header, SDL_widgets.h, to simplify consumption of the widgets SDK by a client application.
 
 I update the Xcode project file to link against sdl-widgets.a and libSDL2_ttf.a and verify the example hello.cpp (renamed ex_widget.cpp) widget app builds from this new environment.
