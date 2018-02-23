@@ -685,3 +685,18 @@ The example audio function generator, make-waves, now builds and generates tones
 ![alt tag](img/sdl2widgets-make-waves.png)
 
 This puts me in a position to start using these portable user interface elements in my SDL2 applications, though I'm not sure yet how to push widgets to a Display object.
+
+# Integrate SDL2-widgets into the Project
+
+I [fork](https://github.com/zenglenn42/sdl2-widgets) the upstream sdl2-widgets repo on github and clean up the build a bit so I could drive it nicely from the tutorial build harness.
+
+This entails:
+
+* Augmenting the makefile so CFLAGS, LDFLAGS, and the path to sdl2-config could be easily overridden from the command-line.
+* Augmenting the makefile to support platform-specific link options (for designating -framework dependencies on macOS).
+* Fixing a couple lambda-related build errors that my uplelvel g++/clang compiler didn't like.
+* Creating a single exported header, SDL_widgets.h, to simplify consumption of the widgets SDK by a client application.
+
+I update the Xcode project file to link against sdl-widgets.a and libSDL2_ttf.a and verify the example hello.cpp (renamed ex_widget.cpp) widget app builds from this new environment.
+
+So now I've a comfortable platform for integrating widgets into the tutorial user-interface.

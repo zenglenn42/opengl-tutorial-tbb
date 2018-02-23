@@ -32,6 +32,9 @@
 		0CAFDBCB2030C9EC0074AB4E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFDBCA2030C9EC0074AB4E /* mesh.cpp */; };
 		0CC6162620370C1C007DD4C5 /* obj_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CC6162520370C1C007DD4C5 /* obj_loader.cpp */; };
 		0CC6162B203713A1007DD4C5 /* monkey3.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CC6162A20371379007DD4C5 /* monkey3.obj */; };
+		0CE46A8B2040B01D007BE21C /* sdl-widgets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CE46A8A2040B01D007BE21C /* sdl-widgets.a */; };
+		0CE46A8F2040B095007BE21C /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CE46A8E2040B095007BE21C /* libSDL2_ttf.a */; };
+		0CE46A912040B191007BE21C /* ex_widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE46A902040B191007BE21C /* ex_widget.cpp */; };
 		0CE4F444203EF8020014F1B6 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C93A7D820301CE500FCCDDD /* CoreAudio.framework */; };
 		0CEC6F592035EAE6008BE2B8 /* altShader.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CEC6F582035EAA2008BE2B8 /* altShader.fs */; };
 		0CEC6F5A2035EAE6008BE2B8 /* altShader.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CEC6F572035EAA1008BE2B8 /* altShader.vs */; };
@@ -96,6 +99,10 @@
 		0CC6162720370C3B007DD4C5 /* obj_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = obj_loader.h; sourceTree = "<group>"; };
 		0CC6162A20371379007DD4C5 /* monkey3.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monkey3.obj; sourceTree = "<group>"; };
 		0CDC37932036174400F421A7 /* transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transform.h; sourceTree = "<group>"; };
+		0CE46A8A2040B01D007BE21C /* sdl-widgets.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "sdl-widgets.a"; path = "../opengl-tutorial-tbb-dependencies/lib/sdl-widgets.a"; sourceTree = "<group>"; };
+		0CE46A8C2040B06B007BE21C /* opengl-tutorial-tbb-dependencies */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "opengl-tutorial-tbb-dependencies"; path = "../opengl-tutorial-tbb-dependencies"; sourceTree = "<group>"; };
+		0CE46A8E2040B095007BE21C /* libSDL2_ttf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_ttf.a; path = "../opengl-tutorial-tbb-dependencies/lib/libSDL2_ttf.a"; sourceTree = "<group>"; };
+		0CE46A902040B191007BE21C /* ex_widget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ex_widget.cpp; sourceTree = "<group>"; };
 		0CEC6F572035EAA1008BE2B8 /* altShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = altShader.vs; sourceTree = "<group>"; };
 		0CEC6F582035EAA2008BE2B8 /* altShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = altShader.fs; sourceTree = "<group>"; };
 		0CF6FBD6203121FB00CC0E13 /* gldebug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gldebug.cpp; sourceTree = "<group>"; };
@@ -107,6 +114,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CE46A8F2040B095007BE21C /* libSDL2_ttf.a in Frameworks */,
+				0CE46A8B2040B01D007BE21C /* sdl-widgets.a in Frameworks */,
 				0CE4F444203EF8020014F1B6 /* CoreAudio.framework in Frameworks */,
 				0C93A7E72030227F00FCCDDD /* Carbon.framework in Frameworks */,
 				0C93A7E32030200300FCCDDD /* IOKit.framework in Frameworks */,
@@ -146,6 +155,7 @@
 		0C781B5120300BB90000131F /* opengl-tutorial-tbb */ = {
 			isa = PBXGroup;
 			children = (
+				0CE46A902040B191007BE21C /* ex_widget.cpp */,
 				0CA5477A203088790065F0BE /* main.cpp */,
 				0C93A7CE203018CE00FCCDDD /* display.h */,
 				0C93A7CF203018CE00FCCDDD /* display.cpp */,
@@ -170,6 +180,9 @@
 		0C93A7D120301ABF00FCCDDD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0CE46A8E2040B095007BE21C /* libSDL2_ttf.a */,
+				0CE46A8C2040B06B007BE21C /* opengl-tutorial-tbb-dependencies */,
+				0CE46A8A2040B01D007BE21C /* sdl-widgets.a */,
 				0C21F324203D111700383337 /* libfreetype.a */,
 				0C21F322203D0F9B00383337 /* SDL2_ttf.framework */,
 				0C93A7E62030227F00FCCDDD /* Carbon.framework */,
@@ -265,6 +278,7 @@
 				0C93A7D0203018CE00FCCDDD /* display.cpp in Sources */,
 				0C9F96A62034905100386F8D /* cone.cpp in Sources */,
 				0CAFDBCB2030C9EC0074AB4E /* mesh.cpp in Sources */,
+				0CE46A912040B191007BE21C /* ex_widget.cpp in Sources */,
 				0C703CDD2034D2A600FFBF49 /* texture.cpp in Sources */,
 				0CA5477B203088790065F0BE /* main.cpp in Sources */,
 				0CF6FBD7203121FB00CC0E13 /* gldebug.cpp in Sources */,
