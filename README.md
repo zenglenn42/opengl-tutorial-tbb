@@ -699,4 +699,34 @@ This entails:
 
 I update the Xcode project file to link against sdl-widgets.a and libSDL2_ttf.a and verify the example hello.cpp (renamed ex_widget.cpp) widget app builds from this new environment.
 
+Interestingly, another test program, testsw.cpp, *fails* at runtime with this error on my mac laptop:
+
+```
+Error: top->render.surf: No hardware accelerated renderers available
+```
+
+which corresponds to a failure in the constructor for the TopWin object at line 807 coming back from SDL_CreateRenderer()
+
+```
+sdl-widgets.cpp
+
+ 798 TopWin::TopWin(const char* wm_title,Rect rect,Uint32 init_flag,Uint32 video_flag,bool accel,void (*disp_cmd)(),void (*set_icon)(SDL_Window*)):
+ 799     WinBase(0,0,0,0,rect.w,rect.h,cNop),
+ 800     texture(0),
+ 801     renderer(0),
+ 802     display_cmd(disp_cmd) {
+ 803   if (SDL_Init(init_flag|SDL_INIT_TIMER|SDL_INIT_VIDEO) < 0) err("SDL init problem");
+ 804 
+ 805   window=SDL_CreateWindow(wm_title,100,100,rect.w,rect.h,video_flag|SDL_WINDOW_SHOWN);
+ 806   if (accel) {
+>807     renderer=SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED); // Try SDL_RENDERER_SOFTWARE instead.
+ 808     if (!(texture=SDL_CreateTexture(renderer,SDL_GetWindowPixelFormat(window),SDL_TEXTUREACCESS_STREAMING,rect.w,rect.h)))
+ 809       err("topw->texture: %s",SDL_GetError());
+ 810   }
+
+```
+Guessing this is a hardware limition on my laptop?  This [thread](http://sdl.5483.n7.nabble.com/No-hardware-accelation-in-MacBook-Pro-Retina-Intel-Iris-td38699.html) suggests SDL_RENDERER_SOFTWARE (over SDL_RENDERER_ACCELERATED) is the better option for my platform.  Alternatively, setting the ctor input parameter accel = false, gets me past this error and another UI pops up on the screen:
+
+![alt tag](img/swtest.png)
+
 So now I've a comfortable platform for integrating widgets into the tutorial user-interface.
