@@ -725,7 +725,7 @@ sdl-widgets.cpp
  810   }
 
 ```
-Guessing this is a hardware limition on my laptop?  This [thread](http://sdl.5483.n7.nabble.com/No-hardware-accelation-in-MacBook-Pro-Retina-Intel-Iris-td38699.html) suggests SDL_RENDERER_SOFTWARE (over SDL_RENDERER_ACCELERATED) is the better option for my platform.  Alternatively, setting the ctor input parameter accel = false, gets me past this error and another UI pops up on the screen:
+Guessing this is a hardware limitation on my laptop.  This [thread](http://sdl.5483.n7.nabble.com/No-hardware-accelation-in-MacBook-Pro-Retina-Intel-Iris-td38699.html) suggests SDL_RENDERER_SOFTWARE (over SDL_RENDERER_ACCELERATED) is the better option for my platform.  Alternatively, setting the ctor input parameter accel = false, gets me past this error and another UI pops up on the screen:
 
 ![alt tag](img/swtest.png)
 
