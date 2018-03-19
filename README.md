@@ -172,7 +172,7 @@ This is a view from the top, so it appears as a circle in two dimensions.
 
 After some thought, this model will have to be tweaked for sure.  I implemented it just with slices (no cross-sectional circular stacks).  Therefore it won't be conducive to specular lighting effects since I'll only have normal vectors sprouting off the pinancle and the circular base positional vertices, and none along the surface of the cone to catch gleams of simulated light.
 
-# All your stoned doritos are belong to us!
+# All your stoned triangles are belong to us!
 
 Work through thebennybox's [Tutorial 4 OpenGL Textures](https://www.youtube.com/watch?v=17axYo6mKhY&list=PLEETnX-uPtBXT9T-hD0Bj31DSnwio-ywh&index=9).
 
@@ -233,7 +233,7 @@ basicShader.vs
 
 ```
 
-Now the stone dorito flies around the screen and scales as well.
+Now the stone triangle flies around the screen and scales as well.
 
 ![alt tag](img/tutorial-5-left.png) ![alt tag](img/tutorial-5-center.png) ![alt tag](img/tutorial-5-right.png)
 
